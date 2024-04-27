@@ -13,6 +13,7 @@ import { AdduserComponent } from './adduser/adduser.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
+
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
     AdduserComponent,
     ProfileComponent,
     UpdateProfileComponent
+
   ],
   imports: [
     BrowserModule,
