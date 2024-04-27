@@ -1,0 +1,12 @@
+.shadowed {
+    opacity: 0.3 !important;
+  }
+  
+  .updateAccount-container{
+    position: relative;
+    top: -600px;
+    left: 30%;
+    width: 50%;
+    height: 50%;
+  }
+  

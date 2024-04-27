@@ -1,0 +1,10 @@
+.accountManagement{
+    margin-left: 250px;
+    max-width: 80%;
+  }
+  
+  .nav-link.active {
+    background-color: #d63384; /* Background color of the active tab */
+    color: #fff; /* Text color of the active tab */
+    border-color: #d63384; /* Border color of the active tab */
+  }

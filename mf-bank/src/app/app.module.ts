@@ -12,6 +12,10 @@ import { UsersComponent } from './users/users.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { BankAccountComponent } from './bank-account/bank-account.component';
+import { AddbankAcComponent } from './addbank-ac/addbank-ac.component';
+import { AccountManagementComponent } from './account-management/account-management.component';
+import { UpdateAccountComponent } from './update-account/update-account.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -20,6 +24,10 @@ const routes: Routes = [
   { path: 'addUser', component: AdduserComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'updateProfile', component: UpdateProfileComponent },
+  { path: 'bankaccount', component: BankAccountComponent },
+  { path: 'addBankAccount', component: AddbankAcComponent },
+  { path: 'accountManagement', component: AccountManagementComponent },
+  { path: 'updateAccount', component: UpdateAccountComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -34,7 +42,11 @@ const routes: Routes = [
     UsersComponent,
     AdduserComponent,
     ProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    BankAccountComponent,
+    AddbankAcComponent,
+    AccountManagementComponent,
+    UpdateAccountComponent
   ],
   imports: [
     BrowserModule,
