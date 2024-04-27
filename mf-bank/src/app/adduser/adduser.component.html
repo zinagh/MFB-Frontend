@@ -1,0 +1,190 @@
+<div class="shadowed" (click)="navigateTousers()">
+<app-users></app-users>
+</div>
+<div class="addUser-container">
+  <div class="container-fluid py-4" style="width: 100%;">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-8" style="width: 100%;">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <div style="text-align: center;">
+                  <h2 style="color: #d63384 !important;">Add a new client to your list</h2>
+
+              </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="text-uppercase text-sm">Client Information</p>
+            <form>
+              <select class="form-control mt-2" id="type" (change)="onTypeChange($event)">
+                  <option selected disabled>Select Type</option>
+                  <option value="company">Company</option>
+                  <option value="employee">Employee</option>
+                  <option value="university">University</option>
+              </select>
+
+          <ng-container *ngIf="isCompany">
+            <div id="companyForm">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="companyName">Company Name</label>
+                          <input class="form-control mt-2" formControlName="companyName" type="text" id="companyName" placeholder="Company Name">
+                        </div>
+                      </div>
+
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="companyemail">Company Email</label>
+                      <input type="email" formControlName="companyemail" class="form-control mt-2" id="companyemail" placeholder="Company Email" >
+
+                    </div>
+                  </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="companyphone">Company Phone</label>
+                        <input class="form-control mt-2" type="tel" formControlName="companyphone" id="companyphone" placeholder="Phone Number" >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="referentfirstName">Contact Person FirstName</label>
+                        <input type="text"  class="form-control mt-2" id="referentfirstName" formControlName="referentfirstName" placeholder="Please enter a company contact person">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="referentlastName">Contact Person LastName</label>
+                        <input class="form-control mt-2" type="text" formControlName="referentlastName" id="referentlastName" placeholder="Please enter a LastName" >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="referentemail">Contact Person Email</label>
+                        <input type="email" class="form-control mt-2" id="referentemail" formControlName="referentemail" placeholder = "Please enter the contact person email">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="referentphone" class="form-control-label">Contact Person Phone</label>
+                        <input class="form-control mt-2" formControlName="referentphone" type="tel"  id="referentphone" placeholder="Phone Number">
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isEmployee">
+            <div id="employeeForm">
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">First Name</label>
+                    <input type="text" id="fname" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="lname">Last Name</label>
+                    <input type="text" id="lname" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+
+                  <div class="col-md-12">
+                    <label class="text-black" for="email">Email</label>
+                    <input type="email" id="email" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Birthday</label>
+                    <input type="text" id="fname" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="lname">CIN</label>
+                    <input type="text" id="lname" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Phone Number </label>
+                    <input type="text" id="fname" class="form-control">
+                  </div>
+
+                </div>
+
+
+
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isUniversity">
+            <div id="universityForm">
+
+              <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="universityname">University Name</label>
+                      <input class="form-control mt-2"  type="text" id="universityname" placeholder="University Name">
+                    </div>
+                  </div>
+
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="universityemail">University Email</label>
+                  <input type="email"  class="form-control mt-2" id="universityemail" placeholder="University Email" >
+
+                </div>
+              </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="universityphone">Company Phone</label>
+                    <input class="form-control mt-2" type="tel" formControlName="universityphone" id="companyphone" placeholder="Phone Number" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="referentfirstName">Contact Person FirstName</label>
+                    <input type="text"  class="form-control mt-2" id="referentfirstName" formControlName="referentfirstName" placeholder="Please enter a company contact person">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="referentlastName">Contact Person LastName</label>
+                    <input class="form-control mt-2" type="text" formControlName="referentlastName" id="referentlastName" placeholder="Please enter a LastName" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="referentemail">Contact Person Email</label>
+                    <input type="email" class="form-control mt-2" id="referentemail" formControlName="referentemail" placeholder = "Please enter the contact person email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="referentphone" class="form-control-label">Contact Person Phone</label>
+                    <input class="form-control mt-2" formControlName="referentphone" type="tel"  id="referentphone" placeholder="Phone Number">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isCompany || isEmployee || isUniversity">
+             <div style="display: flex; justify-content: center;">
+              <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Add User</button>
+          </div>
+          </ng-container>
+          </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      </div>
+      </div>

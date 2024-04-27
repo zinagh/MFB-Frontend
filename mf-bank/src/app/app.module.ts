@@ -8,10 +8,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BaseComponent } from './base/base.component';
 import { FooterComponent } from './footer/footer.component';
+import { UsersComponent } from './users/users.component';
+import { AdduserComponent } from './adduser/adduser.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'addUser', component: AdduserComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'updateProfile', component: UpdateProfileComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -22,7 +30,11 @@ const routes: Routes = [
     HomepageComponent,
     DashboardComponent,
     BaseComponent,
-    FooterComponent
+    FooterComponent,
+    UsersComponent,
+    AdduserComponent,
+    ProfileComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,140 @@
+<app-base></app-base>
+<div class="profile">
+  <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2">
+      <div class="container-fluid py-1">
+        <nav aria-label="breadcrumb">
+
+          <h6 class="text-white font-weight-bolder ms-2">Profile</h6>
+        </nav>
+
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid" >
+      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-primary opacity-6"></span>
+      </div>
+      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+              <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">
+                Alec Thompson
+              </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                CEO / Co-Founder
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+              <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link mb-0 px-0 py-1" [class.active]="isprofile" (click)="toprofile()" role="tab" aria-selected="true">
+                        <i class="fas fa-user"></i>
+                        <span class="ms-1">Profile</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link mb-0 px-0 py-1" [class.active]="ispassw" (click)="topassw()" role="tab" aria-selected="false">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="ms-1">Access Control</span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf=" isprofile">
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12 col-xl-12">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                  <h6 class="mb-0">Profile Information</h6>
+                </div>
+                <div class="col-md-4 text-end">
+                  <a href="javascript:;">
+                    <i class="fas fa-trash-alt"></i>
+                    <i class="fas fa-user-edit text-secondary text-sm ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile" routerLink="/updateProfile"></i>
+                </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+               <hr class="horizontal gray-light my-4">
+              <ul class="list-group">
+                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; Alec M. Thompson</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
+
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </ng-container>
+  <ng-container *ngIf=" ispassw">
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12 col-xl-12">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                  <h6 class="mb-0">Access Control</h6>
+                </div>
+                <div class="col-md-4 text-end">
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <div id="employeeForm">
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">New Password</label>
+                    <input type="text" id="nwpass" class="form-control">
+                  </div>
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">Check Password</label>
+                    <input type="text" id="chkpass" class="form-control">
+                  </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+              <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Update Password</button>
+          </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+  </ng-container>
+  </div>
+</div>
