@@ -22,6 +22,7 @@ import { InternationaltransferManagementComponent } from './internationaltransfe
 import { UpdateInternationaltransferComponent } from './update-internationaltransfer/update-internationaltransfer.component';
 import { FormsModule } from '@angular/forms';
 import { FeesComponent } from './fees/fees.component';
+import { AddfeeComponent } from './addfee/addfee.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -38,6 +39,8 @@ const routes: Routes = [
   { path: 'addinternationaltransfer', component: AddinternationalTransferComponent },
   { path: 'internationaltransfermanagement', component: InternationaltransferManagementComponent },
   { path: 'updateinternationaltransfer', component: UpdateInternationaltransferComponent },
+  { path: 'fees', component: FeesComponent },
+  { path: 'addfee', component: AddfeeComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -61,7 +64,8 @@ const routes: Routes = [
     AddinternationalTransferComponent,
     InternationaltransferManagementComponent,
     UpdateInternationaltransferComponent,
-    FeesComponent
+    FeesComponent,
+    AddfeeComponent
   ],
   imports: [
     BrowserModule,

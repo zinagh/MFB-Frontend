@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./addinternational-transfer.component.css']
 })
 export class AddinternationalTransferComponent {
-  sendOrReceive: boolean = true;
+  sendOrReceive: boolean = false;
   approval: boolean = false;
   fees: boolean = false;
   status: string = ''; 
