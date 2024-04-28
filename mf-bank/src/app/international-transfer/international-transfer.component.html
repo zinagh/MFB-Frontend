@@ -1,11 +1,11 @@
 <app-base></app-base>
 
-<div  class="baccount container-fluid py-4">
+<div  class="internationaltransfer container-fluid py-4">
     <div style="margin-bottom: 5px;">
-        <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/addBankAccount" > Add Bank Account</a>
+        <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/addinternationaltransfer" > Add international transfer</a>
       </div>
      
-      <svg width="190%" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" routerLink="/accountManagement"   >
+      <svg width="190%" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" routerLink="/internationaltransfermanagement"   >
         <title>credit-card</title>
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g transform="translate(-2169.000000, -745.000000)" fill="#d63384" fill-rule="nonzero">
@@ -39,24 +39,24 @@
   <div class="col-12">
     <div class="card mb-4">
       <div class="card-header pb-0">
-        <h6>Accounts</h6>
+        <h6>international transfers</h6>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
           <table class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">AccountNumber</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Titulaire</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Activated</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">employeeUsername</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">creation_date</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Account_balance</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NegativeSoldeAllowed</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NegativeSoldeAmount</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NegativeSoldeDepassement</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NegativeSoldeDepassementDay</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">bankAccountToMakeTransfert</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">sendOrReceive</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">objectofTransaction</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">approval</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">employeeApprovalUsername</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">amount</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">currencyCode</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">fees</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">status</th>
+                
+ 
                 <th class="text-secondary opacity-7"></th>
               </tr>
             </thead>
@@ -94,5 +94,6 @@
   </div>
   <app-footer></app-footer>
 </div>
+
 
 

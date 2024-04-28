@@ -1,0 +1,114 @@
+<div class="shadowed" (click)="navigateTointernationaltransfer()">
+    <app-international-transfer></app-international-transfer>
+    </div>
+        <div class="addinternational-container">
+          <div class="container-fluid py-4" style="width: 100%;">
+              <div class="row" style="width: 100%;">
+                <div class="col-md-8" style="width: 100%;">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="d-flex align-items-center">
+                        <div style="text-align: center;">
+                          <h2 style="color: #d63384 !important;">Add a new international transfer</h2>
+        
+                      </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="text-uppercase text-sm">international transfer Information</p>
+                      <form>
+    
+                        <div id="employeeForm">
+          
+                            <div class="row form-group">
+                              <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="titulaire">bankAccountToMakeTransfert</label>
+                                <input type="number" id="fname" class="form-control">
+                              </div>
+    
+                              <div class="col-md-6">
+                                <label class="text-black">Send or Receive</label><br>
+                                <input type="checkbox" id="sendOrReceive" [(ngModel)]="sendOrReceive" name="sendOrReceive">
+                                <label for="sendOrReceive">Receive</label>
+                            </div>
+                            
+                            </div>
+          
+                            <div class="row form-group">
+          
+                              <div class="col-md-12">
+                                <label class="text-black" for="balance">object of Transaction</label>
+                                <input type="text" id="email" class="form-control">
+                              </div>
+                            </div>
+          
+                            <div class="row form-group">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label class="text-black" for="approval">Approval</label><br>
+                                    <input type="checkbox" id="approval" [(ngModel)]="approval" name="approval">
+                                    <label for="approval">Approved</label>
+                                </div>
+    
+                              <div class="col-md-6">
+                                <label class="text-black" for="employeeUsername">employee Approval Username</label>
+                                <input type="text" id="lname" class="form-control">
+                              </div>
+                            </div>
+          
+                           
+                            <div class="row form-group">
+                              <div class="col-md-12">
+                                <label class="text-black" for="nsa">amount </label>
+                                <input type="number" id="fname" class="form-control">
+                              </div>
+                              
+                              <div class="row form-group">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                  <label class="text-black" for="nsam">currencyCode</label>
+                                  <input type="number" id="fname" class="form-control">
+                                </div>
+                                
+                                <div class="col-md-6">
+                                  <label class="text-black" for="lname">fees</label>
+                                  <input type="checkbox" id="fees" [(ngModel)]="fees" name="fees" value="CURRENCY_CONVERSION_FEE">
+                                  <label for="fees">Currency Conversion Fee</label>
+                                </div>
+                              </div>
+          
+                            </div>
+                           
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                  <label class="text-black">Status</label><br>
+                                  <div>
+                                    <input type="radio" id="status_done" name="status" [(ngModel)]="status" [value]="'done'">
+                                    <label for="status_done">Done</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="status_pending" name="status" [(ngModel)]="status" [value]="'pending'">
+                                    <label for="status_pending">Pending</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="status_rejected" name="status" [(ngModel)]="status" [value]="'rejected'">
+                                    <label for="status_rejected">Rejected</label>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                 
+                        </div>
+          
+                         <div style="display: flex; justify-content: center;">
+                          <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Add</button>
+                      </div>
+          
+                      </form>
+                    </div>
+        
+                  </div>
+        
+                </div>
+              </div>
+              </div>
+              </div>
+        

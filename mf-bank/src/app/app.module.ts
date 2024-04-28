@@ -16,6 +16,12 @@ import { BankAccountComponent } from './bank-account/bank-account.component';
 import { AddbankAcComponent } from './addbank-ac/addbank-ac.component';
 import { AccountManagementComponent } from './account-management/account-management.component';
 import { UpdateAccountComponent } from './update-account/update-account.component';
+import { InternationalTransferComponent } from './international-transfer/international-transfer.component';
+import { AddinternationalTransferComponent } from './addinternational-transfer/addinternational-transfer.component';
+import { InternationaltransferManagementComponent } from './internationaltransfer-management/internationaltransfer-management.component';
+import { UpdateInternationaltransferComponent } from './update-internationaltransfer/update-internationaltransfer.component';
+import { FormsModule } from '@angular/forms';
+import { FeesComponent } from './fees/fees.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -28,6 +34,10 @@ const routes: Routes = [
   { path: 'addBankAccount', component: AddbankAcComponent },
   { path: 'accountManagement', component: AccountManagementComponent },
   { path: 'updateAccount', component: UpdateAccountComponent },
+  { path: 'internationaltransfer', component: InternationalTransferComponent },
+  { path: 'addinternationaltransfer', component: AddinternationalTransferComponent },
+  { path: 'internationaltransfermanagement', component: InternationaltransferManagementComponent },
+  { path: 'updateinternationaltransfer', component: UpdateInternationaltransferComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -46,12 +56,18 @@ const routes: Routes = [
     BankAccountComponent,
     AddbankAcComponent,
     AccountManagementComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    InternationalTransferComponent,
+    AddinternationalTransferComponent,
+    InternationaltransferManagementComponent,
+    UpdateInternationaltransferComponent,
+    FeesComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
