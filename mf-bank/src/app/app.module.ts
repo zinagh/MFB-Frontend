@@ -12,11 +12,13 @@ import { UsersComponent } from './users/users.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'transactions', component: TransactionsComponent },
   { path: 'addUser', component: AdduserComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'updateProfile', component: UpdateProfileComponent },
@@ -34,7 +36,8 @@ const routes: Routes = [
     UsersComponent,
     AdduserComponent,
     ProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
