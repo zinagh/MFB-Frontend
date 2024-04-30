@@ -13,6 +13,8 @@ import { AdduserComponent } from './adduser/adduser.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -20,8 +22,10 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'transactions', component: TransactionsComponent },
   { path: 'addUser', component: AdduserComponent },
+  { path: 'addTransaction', component: AddTransactionComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'updateProfile', component: UpdateProfileComponent },
+  { path: 'updateTransaction', component: UpdateTransactionComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -37,7 +41,9 @@ const routes: Routes = [
     AdduserComponent,
     ProfileComponent,
     UpdateProfileComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    AddTransactionComponent,
+    UpdateTransactionComponent
   ],
   imports: [
     BrowserModule,
