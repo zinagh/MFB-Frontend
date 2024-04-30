@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   Router,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  UrlTree
 } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
@@ -17,30 +18,37 @@ export class AuthGuard extends KeycloakAuthGuard {
     super(router, keycloak);
   }
 
-  public async isAccessAllowed(
+  isAccessAllowed(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    console.log('isAccessAllowed called');
-    if (!this.authenticated) {
-      await this.keycloak.login({
-        redirectUri: window.location.origin
-      });
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+    let permission;
+      if (!this.authenticated) {
+        this.keycloakAngular.login({
+          redirectUri: window.location.origin + '/dashboard'
+        }).catch((e) => console.error(e));
+        return reject(false);
+      }
 
-    const requiredRoles = route.data['roles'];
-
-    if (!requiredRoles || requiredRoles.length === 0) {
-      return true;
-    }
-    const userRoles = this.keycloak.getUserRoles();
-    const hasRequiredRole = requiredRoles.some((role: string) => userRoles.includes(role));
-
-    if (!hasRequiredRole) {
-      this.router.navigate(['unauthorized']);
-      return false;
-    }
-    return true;
+      const requiredRoles: string[] = route.data['roles'];
+      if (!requiredRoles || requiredRoles.length === 0) {
+        permission = true;
+      } else {
+        if (!this.roles || this.roles.length === 0) {
+        permission = false
+        }
+        if (requiredRoles.every((role) => this.roles.indexOf(role) > -1))
+        {
+            permission=true;
+        } else {
+            permission=false;
+        };
+      }
+      if(!permission){
+          this.router.navigate(['/']);
+      }
+      resolve(permission)
+    });
   }
 }

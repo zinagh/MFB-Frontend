@@ -8,7 +8,7 @@ import { KeycloakEventType } from 'keycloak-angular';
 export class SecurityService {
     public profile?: KeycloakProfile;
     constructor(public kcService: KeycloakService){
-        this.init();
+       this.init();
     }
     init(){
         this.kcService.keycloakEvents$.subscribe({

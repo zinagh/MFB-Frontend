@@ -1,12 +1,4 @@
 <div data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-
-
   <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target" style="max-height: 300px;">
@@ -47,7 +39,7 @@
 
                   </ul>
                 </li>
-
+                <li><a (click)="navigateToDashboard()" class="nav-link">Sign In</a></li>
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-facebook"></span></a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-twitter"></span></a></li>
