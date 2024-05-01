@@ -1,0 +1,1 @@
+export enum Role {STUDENT , EMPLOYEE , UNIVERSITY , COMPANY }

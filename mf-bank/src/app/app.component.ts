@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BankaacountService } from './services/bankaacount.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mf-bank';
+  
+  constructor(private bankaacountService: BankaacountService) {
+    
+  }
+ 
   
 }

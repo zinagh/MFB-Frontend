@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BankAccountDto } from '../models/models/BankAccountDto';
 
 @Component({
   selector: 'app-bank-account',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class BankAccountComponent {
 
-}
+  bankaccounts: BankAccountDto[] = [];
+
+ // ngOnInit() :void {
+//this.loadBankaccounts();
+ //}
+  //loadBankaccounts() :void {
+   // this.bankaacountService.getallbankaccounts().subscribe(accounts  => {
+    //  this.bankaccounts = accounts;
+   // });
+  }
+
+

@@ -8,3 +8,26 @@
     color: #fff; /* Text color of the active tab */
     border-color: #d63384; /* Border color of the active tab */
   }
+
+  .container-fluid.py-4 .card {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5) to change transparency */
+}
+.container-fluid.py-4 .card-header   {
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5) to change transparency */
+}
+.container-fluid.py-4 .card-body   {
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5) to change transparency */
+}
+
+.card-header {
+  height: 0.5px; /* Adjust the height as needed */
+}
+
+.card-header .row {
+  justify-content: center;
+}
+
+.card-header h6 {
+  margin: 0;
+  font-size: 18px; /* Adjust the font size as needed */
+}
