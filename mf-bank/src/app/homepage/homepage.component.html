@@ -1,4 +1,11 @@
+
+
+
 <div data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+
+
   <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target" style="max-height: 300px;">
@@ -39,7 +46,8 @@
 
                   </ul>
                 </li>
-                <li><a (click)="navigateToDashboard()" class="nav-link">Sign In</a></li>
+                <li><a (click)="navigateToDashboard()" class="nav-link">Sign in</a></li>
+
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-facebook"></span></a></li>
                 <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-twitter"></span></a></li>
@@ -467,19 +475,18 @@
           <div class="col-md-12 mb-5">
 
 
-
-            <form action="#" class="p-5 bg-white">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-5 bg-white" >
 
               <h2 class="h4 text-black mb-5">Subscribe</h2>
-
+              <ng-container *ngIf="!isNext">
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
+                  <label class="text-black" for="nom">First Name</label>
+                  <input type="text" id="nom" class="form-control" formControlName="nom">
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
+                  <label class="text-black" for="prenom">Last Name</label>
+                  <input type="text" id="prenom" class="form-control"  formControlName="prenom">
                 </div>
               </div>
 
@@ -487,37 +494,60 @@
 
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label>
-                  <input type="email" id="email" class="form-control">
+                  <input type="email" id="email" class="form-control" formControlName="email">
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Birthday</label>
-                  <input type="text" id="fname" class="form-control">
+                  <label class="text-black" for="dateNaissance">Birthday</label>
+                  <input type="date" id="dateNaissance" class="form-control" formControlName="dateNaissance">
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="lname">CIN</label>
-                  <input type="text" id="lname" class="form-control">
+                  <label class="text-black" for="cin">CIN</label>
+                  <input type="text" id="cin" class="form-control" formControlName="cin">
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Phone Number </label>
-                  <input type="text" id="fname" class="form-control">
+                  <label class="text-black" for="numTel">Phone Number </label>
+                  <input type="text" id="numTel" class="form-control" formControlName="numTel">
                 </div>
 
               </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <input type="submit" value="Register" class="btn btn-primary btn-md text-white">
+                <div class="col-md-12" style="margin-left: 90%;">
+                  <a (click)="switchToNext()" class="btn btn-primary btn-md text-white">Next</a>
                 </div>
-              </div>
-
+              </ng-container>
+          <ng-container *ngIf="isNext">
+            <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="userName">UserName</label>
+              <input type="text" id="userName" formControlName="userName" class="form-control">
+            </div>
+            <div class="col-md-12">
+              <label class="text-black" for="password">New Password</label>
+              <input type="password" id="password" formControlName="password" class="form-control">
+            </div>
+            <div class="col-md-12">
+              <label class="text-black" >Confirm Password</label>
+              <input type="password" id="passwordConfirm" (input)="onInputChange($event)" class="form-control">
+            </div>
+            </div>
+            <ng-container *ngIf="noMatch">
+            <p style="color: red;">Passwords don't match*</p>
+          </ng-container>
+            <div class="row form-group">
+            <div class="col-md-12" style="margin-left: 80%;">
+              <a (click)="switchToNext()" class="btn btn-primary btn-md text-white">Previous</a>
+              &nbsp;<input type="submit" value="Register" class="btn btn-primary btn-md text-white">
+            </div>
+          </div>
+          </ng-container>
 
             </form>
+
           </div>
 
         </div>

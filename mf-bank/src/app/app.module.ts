@@ -17,12 +17,14 @@
 import { TesthoussemComponent } from './testhoussem/testhoussem.component';
 import { AuthGuard } from './guard/auth.guard';
 import { VarComponent } from './var/var.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
   const routes: Routes = [
     { path: 'home', component: HomepageComponent},
-    {path:'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
+    {path:'dashboard', component: DashboardComponent ,canActivate: [AuthGuard] },
     { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
     { path: 'addUser', component: AdduserComponent ,canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
@@ -46,7 +48,6 @@ import { VarComponent } from './var/var.component';
           if (await kcService.isLoggedIn()) {
             kcService.loadUserProfile().then(profile => {
               securityService.profile = profile;
-              console.log(profile);
               resolve();
             }).catch((error) => {
               reject(error);
@@ -79,11 +80,14 @@ import { VarComponent } from './var/var.component';
       BrowserModule,
       RouterModule.forRoot(routes),
       AppRoutingModule,
-
+      ReactiveFormsModule,
+      HttpClientModule,
+      FormsModule
     ],
     providers: [
       KeycloakService,
       SecurityService,
+      AuthGuard,
       {
         provide: APP_INITIALIZER,
         useFactory: initializeKeycloak,

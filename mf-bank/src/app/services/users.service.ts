@@ -11,7 +11,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   addUser(userdto: Userdto): Observable<any> {
-    return this.http.post<any>(this.apiUrl + '/adduserdto', userdto)
+    return this.http.post<any>(this.apiUrl + '/add-user', userdto)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('An error occurred:', error);
