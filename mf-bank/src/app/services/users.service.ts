@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Userdto } from '../models/Userdto';
 import { BankAccountDto } from '../models/BankAccountDto';
+import { KeycloakService } from 'keycloak-angular';
+import { throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   private apiUrl = 'http://localhost:9000/user' ;
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private keycloakService: KeycloakService) {}
+
+  retrieveAllUsers(): Observable<Userdto[]> {
+    return this.http.get<Userdto[]>(this.apiUrl + `/retrieve-all-users`)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('An error occurred:', error);
+          return throwError(() => error);
+        })
+      );
+  }
 
   addUser(userdto: Userdto): Observable<any> {
     return this.http.post<any>(this.apiUrl + '/add-user', userdto)
@@ -19,6 +33,7 @@ export class UsersService {
       })
     );
   }
+
   modifierUser(userdto: Userdto): Observable<any> {
     return this.http.put<any>(this.apiUrl + '/modify-user', userdto)
     .pipe(
@@ -43,18 +58,6 @@ export class UsersService {
         })
       );
   }
-
-
-  retrieveAllUsers(): Observable<Userdto[]> {
-    return this.http.get<Userdto[]>(this.apiUrl + `/retrieve-all-users`)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('An error occurred:', error);
-          return throwError(error);
-        })
-      );
-  }
-
 
   retrieveUser(userName: string): Observable<Userdto> {
     return this.http.get<Userdto>(this.apiUrl + `/retrieve-user/${userName}`)
@@ -87,20 +90,10 @@ export class UsersService {
         })
       );
   }
-  getAccountActivityRatio(account: BankAccountDto, startDate: Date, endDate: Date): Observable<number> {
-    const params = new HttpParams()
-      .set('startDate', startDate.toISOString())
-      .set('endDate', endDate.toISOString());
-
-    return this.http.get<number>(`${this.apiUrl}/getAccountActivityRatio`, { params })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('An error occurred:', error);
-          return throwError(error);
-        })
-      );
+ 
+  getAccountActivityRatio(account: any): Observable<number> {
+    return this.http.post<number>(`${this.apiUrl}/getAccountActivityRatio`, account);
   }
-
   getAccountUtilizationRatio(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/getAccountUtilizationRatio`)
       .pipe(
@@ -110,4 +103,5 @@ export class UsersService {
         })
       );
   }
+
 }

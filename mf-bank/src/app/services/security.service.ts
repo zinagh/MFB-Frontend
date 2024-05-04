@@ -16,6 +16,7 @@ export class SecurityService {
                 if(e.type == KeycloakEventType.OnAuthSuccess){
                     this.kcService.loadUserProfile().then(profile=> {
                         this.profile= profile;
+                        console.log(this.profile);
                     })
                 }
             }

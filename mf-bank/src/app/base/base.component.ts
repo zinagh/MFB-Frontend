@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from '../services/security.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base',
@@ -7,7 +8,7 @@ import { SecurityService } from '../services/security.service';
   styleUrls: ['./base.component.css']
 })
 export class BaseComponent implements OnInit {
-  constructor (public securityService: SecurityService) {}
+  constructor (public securityService: SecurityService , private router :Router)  {}
 
   username: string = "";
   public ngOnInit() {
@@ -16,7 +17,10 @@ export class BaseComponent implements OnInit {
       this.username = this.securityService.profile.username;
     }
   }
-
+  profile() {
+    if (this.username) {
+      this.router.navigate(['/profile', { id: this.username }]);
+    }}
   onLogout() {
     this.securityService.kcService.logout(window.location.origin);
   }

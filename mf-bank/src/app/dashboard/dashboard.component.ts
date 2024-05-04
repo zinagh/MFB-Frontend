@@ -1,3 +1,4 @@
+import { UsersService } from './../services/users.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart, LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip } from 'chart.js';
 
@@ -6,11 +7,37 @@ import { Chart, LineController, CategoryScale, LinearScale, Title, Legend, Point
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit , OnInit {
 
   isEmployee: boolean = true;
+  accountUtilization!: number;
+  utilizationRatio!: number;
+  accountActivity!: number;
 
-  constructor() { }
+  constructor(private usersService: UsersService) {}
+
+  ngOnInit(): void {
+    this.getAccountUtilization();
+    this.getAccountActivityRatio();
+  }
+
+  getAccountUtilization(): void {
+    this.usersService.getAccountUtilizationRatio()
+      .subscribe(data => {
+        this.accountUtilization = data / 100;
+      });
+  }
+
+  getAccountActivityRatio(): void {
+    this.usersService.getAccountUtilizationRatio()
+      .subscribe(data => {
+        this.accountActivity = data / 100;
+        console.log("heyyyy:" + this.accountActivity)
+
+      });
+  }
+
+
 
 
   @ViewChild('chartLine') chartLine!: ElementRef;

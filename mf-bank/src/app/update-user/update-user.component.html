@@ -1,0 +1,90 @@
+<div class="shadowed" (click)="navigateTousers()">
+  <app-users></app-users>
+</div>
+  <div class="updateUser-container">
+
+    <div class="container-fluid py-4" style="width: 100%;">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-8" style="width: 100%;">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <div style="text-align: center;">
+                  <h2 style="color: #d63384 !important;"> Update User</h2>
+
+              </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-5 bg-white" >
+
+                <h2 class="h4 text-black mb-5">Subscribe</h2>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="nom">First Name</label>
+                    <input type="text" id="nom" class="form-control" formControlName="nom">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="prenom">Last Name</label>
+                    <input type="text" id="prenom" class="form-control"  formControlName="prenom">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+
+                  <div class="col-md-12">
+                    <label class="text-black" for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="dateNaissance">Birthday</label>
+                    <input type="date" id="dateNaissance" class="form-control" formControlName="dateNaissance">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="cin">CIN</label>
+                    <input type="text" id="cin" class="form-control" formControlName="cin">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="numTel">Phone Number </label>
+                    <input type="text" id="numTel" class="form-control" formControlName="numTel">
+                  </div>
+
+                </div>
+
+
+
+
+                <div style="display: flex; justify-content: center;">
+                  <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Update User</button>
+              </div>
+
+
+              </form>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      </div>
+
+  </div>

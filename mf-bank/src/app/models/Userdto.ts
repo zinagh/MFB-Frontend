@@ -1,7 +1,7 @@
 import { Role } from './Role';
 
 export interface Userdto {
-    userName?: string;
+    userName: string;
     password?: string;
     nom?: string;
     prenom?: string;

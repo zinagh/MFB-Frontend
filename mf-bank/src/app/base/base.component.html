@@ -154,7 +154,7 @@
           <ul class="navbar-nav  justify-content-end">
 
             <li class="nav-item d-flex align-items-center">
-                <a class="nav-link  " routerLink="/profile" >
+                <a class="nav-link  " (click)="profile()" >
                   {{securityService.profile?.firstName?.toUpperCase()}}
                   {{securityService.profile?.lastName?.toUpperCase()}} &nbsp;
                    <i class="fa fa-user me-sm-1"></i>
