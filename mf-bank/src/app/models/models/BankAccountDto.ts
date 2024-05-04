@@ -6,8 +6,8 @@ export interface BankAccountDto {
   accountNumber: string;
   titulaire: string;
   employeeUsername: string;
-  accountBalance: number;
-  creationDate: Date;
+  account_balance: number;
+  creation_date: Date;
   activated: boolean;
   deactivationDate: Date;
   type: TypeBankAccount;

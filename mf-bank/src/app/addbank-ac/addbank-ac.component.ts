@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { BankaacountService } from '../services/bankaacount.service';
 import { BankAccountDto } from '../models/models/BankAccountDto';
 import { TypeBankAccount } from '../enums/TypeBankAccount';
+import { AbstractControl, FormBuilder, FormGroup ,ValidationErrors,Validators  } from '@angular/forms';
+import { validatePositiveBalance } from '../shared/validators';
+import { UsersService } from '../services/users.service';
+import { Userdto } from '../models/Userdto';
+
 
 @Component({
   selector: 'app-addbank-ac',
@@ -10,47 +15,82 @@ import { TypeBankAccount } from '../enums/TypeBankAccount';
   styleUrls: ['./addbank-ac.component.css']
 })
 export class AddbankAcComponent {
+
+  
   bankAccountDto: BankAccountDto = {} as BankAccountDto;
   activated: boolean = false;
   fees: string = '';
   bankAccountTypes = ['currentAccount', 'savingsAccount'];
   selectedType: TypeBankAccount = TypeBankAccount.currentAccount;
 
-  constructor(private router: Router , private bankAccountService: BankaacountService) {}
+  constructor(private router: Router , private bankservice: BankaacountService,
+     private formBuilder: FormBuilder, private userservice: UsersService) {}
 
   navigateToBankAcc() {
     this.router.navigate(['/bankaccount']);
   }
 
-  updateFees() {
-    console.log('Selected bank account type:', this.selectedType); // Check selectedType value
-    if (this.selectedType === TypeBankAccount.currentAccount) {
-      this.fees = 'TRANSACTION_FEE_currentAccount';
-      console.log('Fees:', this.fees); // Check updated fees value
-    } else if (this.selectedType === TypeBankAccount.savingsAccount) {
-      this.fees = 'TRANSACTION_FEE_savingsAccount';
-      console.log('Fees:', this.fees); // Check updated fees value
-    }
-  }
+  accountForm!: FormGroup;
+
 
   ngOnInit(): void {
-   
+    this.accountForm = this.formBuilder.group({
+      titulaire:['Choose a User'],
+      account_balance: ['' , validatePositiveBalance],
+      type: ['' , Validators.required],
+      negativeSoldeDepassementDay: ['', Validators.required],
+    });
+    const accountBalanceControl = this.accountForm.get('accountBalance');
+    if (accountBalanceControl) {
+      accountBalanceControl.setValidators(this.validateAccountBalance);
+    }
+
+    this.accountForm.get('accountBalance')?.setValidators(this.validateAccountBalance);
+    this.retrieveAllUsers();
+  }
+  TypeBankAccount = TypeBankAccount;
+
+  
+
+
+  onSubmit(): void {
+    if (this.accountForm.valid) {
+      const account: BankAccountDto = this.accountForm.value;      
+      this.bankservice.addBankAccount(account).subscribe(
+        (response) => {
+          console.log('Bank account added successfully:', response);
+          this.accountForm.reset();
+          this.navigateToBankAcc();
+        },
+        (error) => {
+          console.error('Failed to add bank account:', error);
+        }
+      ); 
+    } else {
+      this.accountForm.markAllAsTouched();
+    }
+  }
+  
+
+ validateAccountBalance(control: AbstractControl): ValidationErrors | null {
+    const balance = control.value;
+    if (balance && balance < 0) {
+      return { invalidBalance: true };
+    }
+    return null;
   }
 
-  onSubmit(form: any) { // Pass the form as an argument
-    this.bankAccountDto.titulaire = form.titulaire;
-    this.bankAccountDto.type = this.selectedType;
-    // Similarly, bind other form fields to the bankAccountDto object
-
-    this.bankAccountService.addBankAccount(this.bankAccountDto).subscribe(
-      () => {
-        console.log('Bank account added successfully!');
-        // Reset the form or handle success as required
+  users: Userdto[] = [];
+  retrieveAllUsers(){
+    this.userservice.retrieveAllUsers().subscribe(
+    (data) => {
+        this.users = data;
       },
-      error => {
-        console.error('Error adding bank account:', error);
-        // Handle error as required
+      (error: any) => {
+        console.error('Error retrieving users:', error);
       }
     );
   }
+
 }
+

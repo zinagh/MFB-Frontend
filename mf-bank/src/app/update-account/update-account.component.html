@@ -1,4 +1,4 @@
-<div class="shadowed" (click)="navigateToupdate()">
+<div class="shadowed" (click)="navigateToAccount()">
   <app-account-management></app-account-management>
   </div>
   <div class="updateAccount-container">
@@ -17,53 +17,30 @@
             </div>
             <div class="card-body">
 
-              <form>
+          <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
 
               <div id="employeeForm">
-
-                <div class="row form-group">
-                  <div class="col-md-12">
-                    <label class="text-black" for="fname">accountNumber</label>
-                    <input type="number" id="fname" class="form-control">
-                  </div>
-                 
-                </div>
-
-                  <div class="row form-group">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                      <label class="text-black" for="fname">account_balance</label>
-                      <input type="text" id="fname" class="form-control">
-                    </div>
+                  
                     <div class="col-md-6">
-                      <label class="text-black" for="lname">negativeSoldeAmount</label>
-                      <input type="text" id="lname" class="form-control">
+                      <label class="text-black" for="account_balance">account_balance</label>
+                      <input type="text" id="account_balance" formControlName="account_balance" class="form-control">
                     </div>
-                  </div>
-
-                  <div class="row form-group">
-
-                    <div class="col-md-12">
-                      <label class="text-black" for="email">negativeSoldeDepassement</label>
-                      <input type="email" id="email" class="form-control">
+                    <div class="">
+                      <div class="col-md-6">
+                        <label for="activated">Activation :</label>
+                         <input type="checkbox" id="activated" formControlName="activated" [ngClass]="{ 'green-checkbox': activated.value, 'red-checkbox': !activated.value }">
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="row form-group">
-                    <div class="col-md-12">
-                      <label class="text-black" for="fname">negativeSoldeDepassementDay</label>
-                      <input type="text" id="fname" class="form-control">
-                    </div>
-                   
-                  </div>
+                  
 
-                 
               </div>
 
                <div style="display: flex; justify-content: center;">
                 <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Update Profile</button>
             </div>
 
-            </form>
+          </form>
 
             </div>
 

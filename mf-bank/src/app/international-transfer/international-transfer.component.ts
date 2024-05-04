@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./international-transfer.component.css']
 })
 export class InternationalTransferComponent {
-  approval: boolean = false;
+  approval: boolean = true;
   handleButtonClick() {
     
     console.log('Button clicked!');

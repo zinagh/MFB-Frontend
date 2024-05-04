@@ -9,4 +9,12 @@
     width: 50%;
     height: 50%;
   }
+  .green-checkbox {
+    background-color: green;
+  }
+  
+  .red-checkbox {
+    background-color: red;
+  }
+  
   
