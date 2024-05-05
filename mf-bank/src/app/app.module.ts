@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -15,12 +14,18 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { HttpClientModule } from '@angular/common/http'; // Importez HttpClientModule
+import { TransactionService } from './services/transaction.service';
+import { ReactiveFormsModule } from '@angular/forms'; 
+
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'users', component: UsersComponent },
   { path: 'transactions', component: TransactionsComponent },
+  { path: 'invoice', component: InvoiceComponent },
   { path: 'addUser', component: AdduserComponent },
   { path: 'addTransaction', component: AddTransactionComponent },
   { path: 'profile', component: ProfileComponent },
@@ -28,7 +33,6 @@ const routes: Routes = [
   { path: 'updateTransaction', component: UpdateTransactionComponent },
   { path: '**', redirectTo: 'home' }
 ];
-
 
 @NgModule({
   declarations: [
@@ -43,14 +47,19 @@ const routes: Routes = [
     UpdateProfileComponent,
     TransactionsComponent,
     AddTransactionComponent,
-    UpdateTransactionComponent
+    UpdateTransactionComponent,
+    InvoiceComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,// Ajoutez HttpClientModule ici
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    TransactionService // Ajoutez TransactionService ici
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
