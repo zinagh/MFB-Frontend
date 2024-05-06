@@ -40,15 +40,24 @@ export class TransactionsComponent implements OnInit {
       console.log(this.transactionsList);
     });
   }
+
   searchTransactions(): void {
     if (this.inputValue.trim() !== '') {
       this.transactionService.searchTransactions(this.inputValue).subscribe(data => {
-        this.transactionsList = data;
+        // Filtrer les transactions en fonction du mot-clé
+        this.transactionsList = data.filter(transaction =>
+          transaction.reference.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+          transaction.destination.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+          transaction.source.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+          transaction.type.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+          transaction.description.toLowerCase().includes(this.inputValue.toLowerCase())
+        );
       });
     } else {
-      this.loadTransactions();
+      this.loadTransactions(); // Si le champ de recherche est vide, chargez toutes les transactions
     }
   }
+  
   
 
 

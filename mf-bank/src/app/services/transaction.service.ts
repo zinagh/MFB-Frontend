@@ -21,7 +21,7 @@ clientCredentials = {
     password: '1234'
   };
   constructor(private http: HttpClient) {}
-  private bearer = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4OFE0bFpkTVg1WVV0UklqVkJySDhlaVA0UldvZVc3dWZOTHN1VXhHOXZrIn0.eyJleHAiOjE3MTQ5MzkwMDcsImlhdCI6MTcxNDkzODcwNywianRpIjoiMjM2MGQ5NTgtOTdkYS00MTFlLTkyYjktOGQ5Njg2NWU5ZTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9FLUJhbmsiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZGFlZmVhNGEtYjRlMS00MTk1LTg1ZDktNzM4MTk0ZmUxNTAwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWZiYW5rIiwic2Vzc2lvbl9zdGF0ZSI6IjFjNzZjNGFjLTJhM2ItNDRmZS1iMDdmLWZhY2MzM2YyOGRkMyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJTVFVERU5UIiwiZGVmYXVsdC1yb2xlcy1lLWJhbmsiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMWM3NmM0YWMtMmEzYi00NGZlLWIwN2YtZmFjYzMzZjI4ZGQzIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoicmFuaWEgYm91YWNoaXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJyYW5pYSIsImdpdmVuX25hbWUiOiJyYW5pYSIsImZhbWlseV9uYW1lIjoiYm91YWNoaXIiLCJlbWFpbCI6InJhbmlhLmJvdWFjaGlyQGVzcHJpdC50biJ9.YtiEzBGcczounwItEl2OwTK9oUoeRMMWTfxxCaPSZDfojA647fggWzFceMBjSPJx3M3ELmk3PQDqV8s7w2WPvKK8EnHrC1rN97XE5a92Sn6BBFNuJQcsz5TjOGn21zlbmbLFE4A4GUyqh5KRCyfakNaNJ62hwc-080bRvo8frkri6VCfYlEcLrg0hdrxAHaqeWCwbqYVQ-5SwQ0dayieY3A1LNkp2rD1lEoF_z3sjscDYKrYcg3snmYmfNio957bsXAAXnsERavRpWmia8n5i2D8il0zKiVozohb0VMuMgX9IgIpuZATWshcYdFsPxwHhDf68W-O8nn54cNRePI7ZQ";  
+  private bearer = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4OFE0bFpkTVg1WVV0UklqVkJySDhlaVA0UldvZVc3dWZOTHN1VXhHOXZrIn0.eyJleHAiOjE3MTUwMzAxNTcsImlhdCI6MTcxNTAyOTg1NywianRpIjoiZTcyZGU3OGMtMTA5ZC00YmRhLWI4YTItYWVjMTNkMDAyYWFhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9FLUJhbmsiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZGFlZmVhNGEtYjRlMS00MTk1LTg1ZDktNzM4MTk0ZmUxNTAwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWZiYW5rIiwic2Vzc2lvbl9zdGF0ZSI6IjZlZTI0YjQzLTVjZTMtNDg0Ni05MjNkLWE0OTVmMDBhNTQ1NyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJTVFVERU5UIiwiZGVmYXVsdC1yb2xlcy1lLWJhbmsiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiNmVlMjRiNDMtNWNlMy00ODQ2LTkyM2QtYTQ5NWYwMGE1NDU3IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoicmFuaWEgYm91YWNoaXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJyYW5pYSIsImdpdmVuX25hbWUiOiJyYW5pYSIsImZhbWlseV9uYW1lIjoiYm91YWNoaXIiLCJlbWFpbCI6InJhbmlhLmJvdWFjaGlyQGVzcHJpdC50biJ9.fYvEKM2z7leKr94PtMsNNqmLo2gN2Br3P0cRpp0IlZoXmaA941ZKWDmLJiaavliZfBmzVxTK82H9m-cHKadeCGqGGyJFBw9zBmUgfOgrXELpTFQBv86LoGULxjnDmdX2RcvRfdgbDryoSvnDQjDqKJeWDUaUysTvkodQonT6-VMYFheBOg7OkSSS1a8Tx62wYyf0NELkRmpSJJ-RFfsGp3RsE4pydNNA5Tx_nlc5oRcV50gOZdjngnqY_XvVbYPlbfoQm9ymZFh_3vPOhYQMX7xqWU64079PjYrSHJGk0qoeQmCdYgVm-TLiZm4jDovuTJM6-0rV32G3_tU5Q8ctIw";  
   addTransaction(transactionDto: TransactionDto): Observable<TransactionDto> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -54,9 +54,14 @@ clientCredentials = {
         })
       );
   }
-
   getTransactionById(transactionId: string): Observable<TransactionDto> {
-    return this.http.get<TransactionDto>(`${this.apiUrl}/gettransaction/${transactionId}`)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.bearer}`
+      })
+    };
+    return this.http.get<TransactionDto>(`${this.apiUrl}/${transactionId}`, httpOptions)
       .pipe(
         catchError(error => {
           console.error('Error retrieving transaction by ID:', error);
@@ -64,6 +69,7 @@ clientCredentials = {
         })
       );
   }
+
 
   deleteTransaction(reference: string): Observable<void> {
     const httpOptions = {
@@ -91,10 +97,9 @@ clientCredentials = {
       })
     };
   
-    // Inclure l'ID de la transaction dans l'URL
+    // Utilisez la référence de la transaction dans l'URL
     const url = `${this.apiUrl}/update/${transactionDto.reference}`;
   
-    // Envoyer les données de la transaction dans la requête HTTP PUT
     return this.http.put<void>(url, transactionDto, httpOptions)
       .pipe(
         catchError(error => {
@@ -104,9 +109,19 @@ clientCredentials = {
       );
   }
   
+  
+  
+  
+  
 
   searchTransactions(keyword: string): Observable<TransactionDto[]> {
-    return this.http.get<TransactionDto[]>(`${this.apiUrl}/searchtransactions/${keyword}`)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.bearer}`
+      })
+    };
+    return this.http.get<TransactionDto[]>(`${this.apiUrl}/search?keyword=${keyword}`, httpOptions)
       .pipe(
         catchError(error => {
           console.error('Error searching transactions:', error);
@@ -114,5 +129,7 @@ clientCredentials = {
         })
       );
   }
+  
+  
 
 }

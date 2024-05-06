@@ -14,10 +14,11 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
-import { InvoiceComponent } from './invoice/invoice.component';
 import { HttpClientModule } from '@angular/common/http'; // Importez HttpClientModule
 import { TransactionService } from './services/transaction.service';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 const routes: Routes = [
@@ -25,12 +26,11 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'users', component: UsersComponent },
   { path: 'transactions', component: TransactionsComponent },
-  { path: 'invoice', component: InvoiceComponent },
   { path: 'addUser', component: AdduserComponent },
   { path: 'addTransaction', component: AddTransactionComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'updateProfile', component: UpdateProfileComponent },
-  { path: 'updateTransaction', component: UpdateTransactionComponent },
+  { path: 'updateTransaction/:id', component: UpdateTransactionComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -48,7 +48,8 @@ const routes: Routes = [
     TransactionsComponent,
     AddTransactionComponent,
     UpdateTransactionComponent,
-    InvoiceComponent,
+
+  
   ],
   imports: [
     BrowserModule,

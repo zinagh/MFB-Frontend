@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from '../services/transaction.service';
 import { TransactionDto } from '../models/TransactionDto';
 
+
 @Component({
   selector: 'app-update-transaction',
   templateUrl: './update-transaction.component.html',
@@ -29,6 +30,7 @@ export class UpdateTransactionComponent implements OnInit {
   loadTransactionData(): void {
     this.transactionService.getTransactionById(this.transactionId).subscribe(
       (data) => {
+        console.log(data);
         this.transactionData = data;
         this.initFormWithData();
       },
@@ -51,6 +53,7 @@ export class UpdateTransactionComponent implements OnInit {
       destination: [this.transactionData?.destination || '', Validators.required],
       source: [this.transactionData?.source || '', Validators.required]
     });
+    this.transactionForm.patchValue({montant:this.transactionData?.montant})
   }
 
   modifyTransaction(): void {
