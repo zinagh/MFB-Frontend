@@ -48,6 +48,24 @@ export class BankaacountService {
     );
   }
 
+  retrieveAccountBalance(bankAccountTitulaire: string): Observable<number> {
+    return this.http.get<any>(`${this.apiUrl}/getbankaccountbyTitulaire/${bankAccountTitulaire}`).pipe(
+      map(response => {
+        if (response) {
+          return response.account_balance;
+        } else {
+          return 0.0;
+        }
+      }),
+      catchError(error => {
+        console.error('Error retrieving account balance:', error);
+        throw new Error('Error retrieving account balance');
+      })
+    );
+  }
+
+  
+
   addBankAccount(bankAccountDto: BankAccountDto): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/addbankaccount`, bankAccountDto).pipe(
       catchError(error => {

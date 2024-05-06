@@ -73,11 +73,11 @@ confirmDelete(accountNumber: string | undefined): void {
 removeBankAccount(accountNumber: string): void {
   this.bankservice.removeBankAccount(accountNumber).subscribe(
     () => {
-      console.log('User removed successfully');
+      console.log('account removed successfully');
       this.loadBankaccounts();
     },
     (error) => {
-      console.error('Failed to remove user:', error);
+      console.error('Failed to remove account:', error);
     }
   );
 }

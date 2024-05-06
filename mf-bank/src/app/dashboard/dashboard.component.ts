@@ -1,25 +1,147 @@
+import { UsersService } from './../services/users.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip } from 'chart.js';
+import { LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip } from 'chart.js';
+import { SecurityService } from '../services/security.service';
+import { Observable, catchError, forkJoin, map, of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Userdto } from '../models/Userdto';
+import { InternationalTransferService } from '../services/international-transfer.service';
+import { BankaacountService } from '../services/bankaacount.service';
+import { BankAccountDto } from '../models/BankAccountDto';
+import Chart from 'chart.js/auto';
 
 @Component({
+  
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
 
+  public chart: any;
+  isSpecificUser: boolean=false;
+  debounceTimer: any;
+  user!: Userdto;
+  users!: Userdto[];
   isEmployee: boolean = true;
+  accountUtilization!: number;
+  utilizationRatio!: number;
+  accountActivity!: number;
+  accountBalance!: number;
+  FeeIncomePerAccount!: any;
+  selectedUser:string = "Select User";
+  
+  constructor(private usersService: UsersService, public securityService: SecurityService,
+    public interTrans: InternationalTransferService, private bankservice: BankaacountService
+  ) {
+    const currentDate = new Date();
+    this.selectedMonth = currentDate.getMonth() + 1;
 
-  constructor() { }
-
+  }
+  clientUserName!: string;
+  username!: string;
 
   @ViewChild('chartLine') chartLine!: ElementRef;
-  ngAfterViewInit(): void {
-    this.createLineChart();
-}
+  lineChart: Chart | null = null;
+
+  ngOnInit(): void {
+    if (this.securityService.profile && this.securityService.profile.username) {
+      console.log(this.securityService.profile);
+      this.username = this.securityService.profile.username;
+    }
+    this.createLineChart(this.username);
+    this.retrieveAllUsers();
+    this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
+    this.createChart();
+    
+    
+    /*google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(() => this.drawChart());*/
+
+  }
 
 
-createLineChart() {
+  theTotal!: number;
+  hgetFeeIncomePerAccount(): void {
+    this.usersService.getFeeIncomePerAccount(this.username)
+      .subscribe((response: any) => {
+        const keys = Object.keys(response);
+        if (keys.length > 0 && !isNaN(Number(keys[0]))) {
+          const firstKey = Number(keys[0]);
+          this.theTotal =firstKey;
+          console.log('First key:', this.theTotal);
+        } else {
+          console.error('No numeric keys found in the response.');
+        }
+      }, (error: HttpErrorResponse) => {
+        console.error('An error occurred:', error);
+      });
+  }
+
+
+  retrieveAllUsers(): void {
+    this.usersService.retrieveAllUsers().subscribe({
+      next: (data: Userdto[]) => {
+        this.users = data;
+        console.log(this.users);
+      },
+      error: (error: any) => {
+        console.error('An error occurred:', error);
+        // Handle error
+      }
+    });
+  }
+
+  userforstat!:string;
+  selectedUserr!: string;
+  onUserSelect(event: any): void {
+    const selectedValue: string | null = event?.target?.value;
+  if (selectedValue) {
+    this.userforstat = selectedValue;
+    this.selectedUserr = selectedValue;
+    this.retrieveAccountBalance(this.selectedUserr);
+    this.loadBankaccountByTitulaire(this.userforstat, this.selectedMonth);
+    if (this.lineChart) {
+      this.lineChart.destroy();
+      console.log("chart destroyd");
+     
+
+    }
+
+   this.createLineChart(selectedValue);
+   console.log("chart created");
+
+  }}
+
+  onInputChange(event: Event): void {
+
+    const value = (event.target as HTMLInputElement).value;
+    this.clientUserName = value;
+    if (this.clientUserName) {
+      this.createLineChart(this.clientUserName);
+    } else {
+      this.createLineChart(this.clientUserName);
+    }
+  }
+
+
+
+
+ createLineChart(username: string) {
+  forkJoin([
+    this.getPercentageOutgoingTransfers(username).pipe(
+      catchError(error => {
+        console.error('Error fetching Out going Transfers:', error);
+        return of(Array(12).fill(0));
+      })
+    ),
+    this.getFeeIncomePerAccount(username).pipe(
+      catchError(error => {
+        console.error('Error fetching Fee Income Per Account:', error);
+        return of(Array(12).fill(0));
+      })
+    )
+  ]).subscribe(([outgoingTransfers, feeIncomePerAccount]) => {
   Chart.register(LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip);
 
   var ctx1: any = document.getElementById("chart-line");
@@ -35,29 +157,29 @@ createLineChart() {
   gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
   gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-  new Chart(ctx, {
+  this.lineChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [{
-          label: "Mobile apps",
+          label: "Out going Transfers",
           borderColor: "#cb0c9f",
           borderWidth: 3,
           backgroundColor: gradientStroke1,
           fill: true,
           cubicInterpolationMode: 'monotone',
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          data: outgoingTransfers,
           tension: 0.4,
           pointRadius: 0,
         },
         {
-          label: "Websites",
+          label: "Fee Income Per Account",
           borderColor: "#3A416F",
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
           cubicInterpolationMode: 'monotone',
-          data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+          data: feeIncomePerAccount,
           tension: 0.4,
           pointRadius: 0,
         },
@@ -120,9 +242,102 @@ createLineChart() {
       }
     },
   });
-
+});
 }
 
 
 
+getPercentageOutgoingTransfers(username: string) {
+  return  this.usersService.getPercentageOutgoingTransfers(username);
 }
+
+
+getFeeIncomePerAccount(username: string): Observable<number[]> {
+  return  this.usersService.getFeeIncomePerAccount(username).pipe(
+    map(response => response[Object.keys(response)[0]]),
+    catchError((error: HttpErrorResponse) => {
+      console.error('An error occurred:', error);
+      return throwError(error);
+    })
+  );
+}
+
+bankaccount!: BankAccountDto;
+loadBankaccountByTitulaire(name: string, month: number) :void {
+  this.bankservice.retrieveBankAccountByTitulaire(name).subscribe(data  => {
+    this.bankaccount = data;
+    if(this.bankaccount.accountNumber){
+      console.log(this.bankaccount);
+    this.getstatisticsForChart(this.bankaccount.accountNumber, month);
+  }
+  });
+}
+
+statics!: number[];
+getstatisticsForChart(bankaccountId: string, month: number ) :void {
+
+  this.interTrans.getStatisticsForChart(bankaccountId, month).subscribe(data  => {
+   this.statics = data;
+   console.log(bankaccountId + " " + month + " " + this.statics);
+   this.createChart();
+  });
+}
+
+selectedMonth: number;
+months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+onMonthChange(event: any): void {
+  const selectedIndex = (event.target as HTMLSelectElement).selectedIndex;
+  this.selectedMonth = selectedIndex + 1;
+  if(this.userforstat){
+  this.loadBankaccountByTitulaire(this.userforstat, this.selectedMonth);
+} else {
+  this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
+}
+  }
+
+  createChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart("pieChart", {
+      type: 'pie',
+      data: {
+        labels: ['Receive', 'Send'],
+        datasets: [{
+          data:this.statics,
+          backgroundColor: [
+            '#cb0c9f',
+            '#82d616'
+            
+          ],
+          hoverOffset: 4
+        }
+       ]
+      },
+      options: {
+        aspectRatio: 2.5
+      }
+    });
+  }
+  
+
+  retrieveAccountBalance(bankAccountTitulaire: string): void {
+    this.bankservice.retrieveAccountBalance(bankAccountTitulaire)
+      .subscribe(
+        balance => {
+          this.accountBalance = balance;
+        },
+        error => {
+          console.error('Error retrieving account balance:', error);
+        }
+      );
+  }
+
+
+
+
+
+
+
+      }
