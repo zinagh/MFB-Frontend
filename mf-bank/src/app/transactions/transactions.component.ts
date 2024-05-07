@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionDto } from '../models/TransactionDto';
 import { TransactionService } from '../services/transaction.service'; // Assurez-vous que le chemin d'import est correct
 import { Router } from '@angular/router';
-
+import { jsPDF } from 'jspdf';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -59,8 +60,72 @@ export class TransactionsComponent implements OnInit {
   }
   
   
+  generateExcel(): void {
+    // Créer un tableau de données à partir des transactions
+    const data: any[] = this.transactionsList.map(transaction => ({
+      Reference: transaction.reference,
+      Destination: transaction.destination,
+      Source: transaction.source,
+      Montant: transaction.montant,
+      DateHeure: transaction.date_heure,
+      Type: transaction.type,
+      Description: transaction.description,
+      Validation: transaction.validation,
+      CancelByReceiver: transaction.cancelByreceiver,
+      CancelBySender: transaction.cancelBysender
+    }));
 
+    // Convertir le tableau de données en feuille de calcul Excel
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
 
+    // Créer le classeur Excel
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+
+    // Générer le fichier Excel
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    // Télécharger le fichier Excel
+    this.saveAsExcelFile(excelBuffer, 'transactions');
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const downloadLink: HTMLAnchorElement = document.createElement('a');
+    const url: string = window.URL.createObjectURL(data);
+    downloadLink.href = url;
+    downloadLink.download = fileName + '.xlsx';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+  generatePDF(transaction: TransactionDto): void {
+    // Création d'une instance de jsPDF
+    const doc = new jsPDF();
+
+    // Génération du contenu du PDF à partir des informations de la transaction
+    const content = `
+      Reference: ${transaction.reference}
+      Destination: ${transaction.destination}
+      Source: ${transaction.source}
+      Montant: ${transaction.montant}
+      Date-Heure: ${transaction.date_heure}
+      Type: ${transaction.type}
+      Description: ${transaction.description}
+      Validation: ${transaction.validation}
+      CancelByreceiver: ${transaction.cancelByreceiver}
+      CancelBysender: ${transaction.cancelBysender}
+    `;
+
+    // Ajout du contenu au PDF
+    doc.text(content, 10, 10);
+
+    // Génération du fichier PDF
+    const fileName = 'transaction.pdf';
+    doc.save(fileName);
+
+    // Ouvrir le fichier PDF dans un nouvel onglet
+    window.open(doc.output('bloburl'), '_blank');
+  }
 
   loadTransactionsByTitulaire(name: string): void {
     this.transactionService.searchTransactions(name).subscribe(data => {

@@ -53,7 +53,6 @@ export class UpdateTransactionComponent implements OnInit {
       destination: [this.transactionData?.destination || '', Validators.required],
       source: [this.transactionData?.source || '', Validators.required]
     });
-    this.transactionForm.patchValue({montant:this.transactionData?.montant})
   }
 
   modifyTransaction(): void {

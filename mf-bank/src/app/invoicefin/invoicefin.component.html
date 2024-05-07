@@ -1,0 +1,60 @@
+<app-base></app-base>
+
+<style>
+  /* Définition de la classe pour ajuster la taille de l'icône de sélection */
+  .small-select-icon .form-select-arrow {
+    font-size: 1rem; /* Taille de police réduite pour l'icône de sélection */
+  }
+</style>
+
+<div class="users container-fluid py-4">
+  <div class="row">
+    <div class="col text-center mx-auto">
+      <!-- Appliquer la classe small-select-icon pour réduire l'icône de sélection -->
+      <select (change)="onYearChange($event)" class="form-select form-select-lg mb-3 form-select-sm small-select-icon text-center" aria-label="Year">
+        <option value="" selected disabled>Choose Year</option>
+        <!-- Ajout des années depuis 1997 -->
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center mx-auto">
+      <!-- Appliquer la classe small-select-icon pour réduire l'icône de sélection -->
+      <select (change)="onMonthChange($event)"  class="form-select form-select-lg mb-3 form-select-sm small-select-icon text-center" aria-label="Month" >
+        <option value="" selected disabled>Choose Month</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center mx-auto">
+      <button class="btn btn-primary btn-lg" (click)="getTotalAmount()">Get Total Amount</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center mx-auto">
+      <h3>Total Amount: {{ totalAmount }}</h3>
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-md text-center">
+      <canvas #barChart width="400" height="400"></canvas>
+    </div> 
+  </div>
+  
+</div>
+
+<app-footer></app-footer>

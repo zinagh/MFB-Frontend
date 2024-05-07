@@ -14,18 +14,18 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
-import { HttpClientModule } from '@angular/common/http'; // Importez HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
 import { TransactionService } from './services/transaction.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { InvoicefinComponent } from './invoicefin/invoicefin.component';
+import { FormsModule } from '@angular/forms'; // Importez FormsModule
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'users', component: UsersComponent },
   { path: 'transactions', component: TransactionsComponent },
+  { path: 'invoicefin', component: InvoicefinComponent },
   { path: 'addUser', component: AdduserComponent },
   { path: 'addTransaction', component: AddTransactionComponent },
   { path: 'profile', component: ProfileComponent },
@@ -48,18 +48,18 @@ const routes: Routes = [
     TransactionsComponent,
     AddTransactionComponent,
     UpdateTransactionComponent,
-
-  
+    InvoicefinComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     AppRoutingModule,
-    HttpClientModule,// Ajoutez HttpClientModule ici
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule // Ajoutez FormsModule ici
   ],
   providers: [
-    TransactionService // Ajoutez TransactionService ici
+    TransactionService
   ],
   bootstrap: [AppComponent]
 })
