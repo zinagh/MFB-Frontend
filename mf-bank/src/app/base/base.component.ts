@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class BaseComponent implements OnInit {
   constructor (public securityService: SecurityService , private router :Router)  {}
+  isEmployee: boolean = this.securityService.hasRoleIn(['EMPLOYEE']);
 
   username: string = "";
   public ngOnInit() {

@@ -35,9 +35,9 @@ ngOnInit(): void {
 
   });
 
-    this.route.params.subscribe(params => {
-      this.username = params['id'];
-    });
+  this.route.params.subscribe(params => {
+    this.username = params['id'];
+  });
 
       this.retrieveUser(this.username);
 

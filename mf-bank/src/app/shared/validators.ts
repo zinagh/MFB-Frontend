@@ -34,4 +34,5 @@ import { AbstractControl, ValidatorFn } from "@angular/forms";
     // Return validation result
     return isValid ? null : { 'invalidPassword': true };
   };
+
 }

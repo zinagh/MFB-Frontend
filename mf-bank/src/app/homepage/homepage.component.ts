@@ -6,6 +6,7 @@ import { UsersService } from '../services/users.service';
 import { Role } from '../models/Role';
 import { Userdto } from '../models/Userdto';
 import { passwordValidator, validateDateOfBirth } from '../shared/validators';
+import { Article } from '../models/Article';
 
 @Component({
   selector: 'app-homepage',
@@ -16,7 +17,8 @@ export class HomepageComponent implements OnInit  {
 
   constructor(private router: Router ,private formBuilder: FormBuilder, private userService: UsersService){}
   isNext: boolean = false;
-
+  newsData!: Article[];
+  currentIndex = 0;
   switchToNext(){
     this.isNext = !this.isNext;
     console.log(this.confirmPassword);
@@ -29,6 +31,8 @@ export class HomepageComponent implements OnInit  {
 
 
   ngOnInit(): void {
+    this.getNews();
+    setInterval(() => this.changeArticle(), 5000);
     this.userForm = this.formBuilder.group({
       userName: ['', Validators.required],
       password: ['', passwordValidator()],
@@ -46,6 +50,30 @@ export class HomepageComponent implements OnInit  {
   onInputChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.confirmPassword = inputElement.value;
+  }
+  nextArticle(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.newsData.length;
+  }
+
+  prevArticle(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.newsData.length) % this.newsData.length;
+  }
+
+  getNews(): void {
+    this.userService.getNews()
+      .subscribe(
+        (data) => {
+          this.newsData = data;
+          console.log(data);
+        },
+        (error) => {
+          console.error('Error fetching news:', error);
+        }
+      );
+  }
+
+  changeArticle(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.newsData.length;
   }
 
   onSubmit(): void {

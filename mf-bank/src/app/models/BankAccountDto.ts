@@ -4,9 +4,9 @@ import { TypeBankAccount } from "./TypeBankAccount";
 
 export interface BankAccountDto {
   accountNumber: string;
-  titulaire: string;
+  bankAccountTitulaire: string;
   employeeUsername: string;
-  accountBalance: number;
+  account_Balance: number;
   creationDate: Date;
   activated: boolean;
   deactivationDate: Date;

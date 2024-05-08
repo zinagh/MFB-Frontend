@@ -1,0 +1,132 @@
+<div class="shadowed" (click)="navigateTousers()">
+  <app-dashboard></app-dashboard>
+  </div>
+  <div class="churn-container"  style="position: absolute; top: 10%; left: 29%; width: 50%;" >
+    <div class="container-fluid py-4" style="width: 100%;">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-8" style="width: 100%;">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <div style="text-align: center;">
+                  <h2 style="color: #d63384 !important;">Prediction</h2>
+              </div>
+              </div>
+            </div>
+
+              <div class="card mb-4">
+
+                      <div class="card-body">
+                        <select class="form-control mt-2" id="type" [(ngModel)]="selectedUser" (change)="onUserSelect($event)">
+                          <option selected disabled>Select User</option>
+                          <option *ngFor="let user of users" [value]="user.userName">{{ user.userName }}</option>
+                        </select>
+                        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-5 bg-white" >
+
+                          <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="nom">First Name</label>
+                              <input type="text" id="nom" class="form-control" formControlName="nom" readonly>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="text-black" for="prenom">Last Name</label>
+                              <input type="text" id="prenom" class="form-control"  formControlName="prenom" readonly>
+                            </div>
+                          </div>
+
+                          <div class="row form-group">
+                            <div class="col-md-12">
+                              <label class="text-black" for="email">Email</label>
+                              <input type="email" id="email" class="form-control" formControlName="email" readonly>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="dateNaissance">Birthday</label>
+                              <input type="date" id="dateNaissance" class="form-control" formControlName="dateNaissance" readonly>
+                            </div>
+                            <div class="col-md-6">
+                              <label class="text-black" for="cin">CIN</label>
+                              <input type="text" id="cin" class="form-control" formControlName="cin" readonly>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="numTel">Phone Number </label>
+                              <input type="text" id="numTel" class="form-control" formControlName="numTel" readonly>
+                            </div>
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="account_Balance">Account Balance  </label>
+                              <input type="text" id="account_Balance" class="form-control" formControlName="account_Balance" readonly>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="EstimatedSalary">Estimated Salary</label>
+                              <input type="number" id="EstimatedSalary" class="form-control" formControlName="EstimatedSalary">
+                              <!-- Display error message if EstimatedSalary is invalid -->
+                              <div *ngIf="userForm.get('EstimatedSalary')!.errors?.['required'] && userForm.get('EstimatedSalary')!.touched | number" class="text-danger">
+                                Estimated Salary is required.
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="CreditScore">Credit Score</label>
+                              <input type="number" id="CreditScore" class="form-control" formControlName="CreditScore">
+                              <!-- Display error message if CreditScore is invalid -->
+                              <div *ngIf="userForm.get('CreditScore')!.errors?.['creditScoreRange'] && userForm.get('CreditScore')!.touched" class="text-danger">
+                                Credit Score must be between 300 and 850.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <label class="text-black" for="Tenure">Tenure</label>
+                              <input type="number" id="Tenure" class="form-control" formControlName="Tenure">
+                              <!-- Display error message if Tenure is invalid -->
+                              <div *ngIf="userForm.get('Tenure')!.errors?.['required'] && userForm.get('Tenure')!.touched | number" class="text-danger">
+                                Tenure is required.
+                              </div>
+                            </div>
+
+                              <div class="col-md-6">
+                                <label class="text-black">Gender</label>
+                                <div class="custom-radio-group">
+                                  <input type="radio" id="company" name="type" value="company" [(ngModel)]="selectedGender" (change)="onGenderChange('male')">
+                                  <label for="company">male</label>
+
+                                  <input type="radio" id="employee" name="type" value="employee" [(ngModel)]="selectedGender" (change)="onGenderChange('female')">
+                                  <label for="employee">female</label>
+
+                              </div>
+                            </div> &nbsp;
+
+
+
+                            <div style="display: flex; justify-content: center;">
+                              <button type="submit" class="btn btn-primary btn-sm" style="width: 160px;">Churn</button> &nbsp;
+                            </div>
+                            <ng-container  *ngIf="loading">
+                                  <div class="loading-container">
+                                    <div class="loading-spinner"></div>
+                                  </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="showResults">
+                              <h3>Churn Prediction Results</h3>
+                              <ul>
+                                <li> {{label}} </li>
+                              </ul>
+                            </ng-container>
+
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+
+             </div>
+
+            </div>
+        </div>
+      </div>
+

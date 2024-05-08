@@ -41,8 +41,7 @@
                   <a href="#about-section" class="nav-link">About Us</a>
                   <ul class="dropdown">
                     <li><a href="#team-section" class="nav-link">Team</a></li>
-                    <li><a href="#Services-section" class="nav-link">Our Services</a></li>
-                    <li><a href="#testimonials-section" class="nav-link">Testimonials</a></li>
+
 
                   </ul>
                 </li>
@@ -261,135 +260,30 @@
 
 
     <section class="site-section">
-      <div class="container">
 
         <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Our Services</h2>
+            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">News & Insights</h2>
+          </div>
+        </div>
+        <div class="article-container">
+          <div class="article-wrapper" *ngIf="newsData.length > 0">
+            <div class="article" style="cursor: pointer;">
+              <a href="https://www.cnbc.com/finance/">
+              <img [src]="newsData[currentIndex].image_url" alt="Article Image">
+              <div (click)="prevArticle()" class="arrow left-arrow">&larr;</div>
+              <div (click)="nextArticle()" class="arrow right-arrow">&rarr;</div>
+              <div class="article-details">
+                <h3>{{ newsData[currentIndex].title }}</h3>
+                <p>Author: {{ newsData[currentIndex].author }}</p>
+                <p>Published: {{ newsData[currentIndex].time }}</p>
+              </div>
+            </a>
+            </div>
           </div>
         </div>
 
-        <div class="row align-items-lg-center" >
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-
-            <div class="owl-carousel slide-one-item-alt">
-              <img src="../../assets/images/slide_1.jpg" alt="Image" class="img-fluid">
-              <img src="../../assets/images/slide_2.jpg" alt="Image" class="img-fluid">
-              <img src="../../assets/images/slide_3.jpg" alt="Image" class="img-fluid">
-            </div>
-            <div class="custom-direction">
-              <a href="#" class="custom-prev"><span><span class="icon-keyboard_backspace"></span></span></a><a href="#" class="custom-next"><span><span class="icon-keyboard_backspace"></span></span></a>
-            </div>
-
-          </div>
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="owl-carousel slide-one-item-alt-text">
-              <div>
-                <h2 class="section-title mb-3">01. Bank Account Management </h2>
-                <p>Bank account management encompasses a variety of tasks you can perform to oversee your finances. This includes initiating accounts, depositing and withdrawing funds, controlling account activity through activation and deactivation, and setting limits to manage your spending. You can also use bank services to calculate interest rates for potential savings accounts and set up overdraft protection in case your balance dips low..</p>
-
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
-              </div>
-              <div>
-                <h2 class="section-title mb-3">02.Card Management</h2>
-                <p>
-                  Bank card management empowers you to control your debit or credit card. It covers the entire lifecycle of your card, from requesting and activating a new one to making purchases online and in stores, or withdrawing cash from ATMs. You can deactivate your card if it's lost or stolen, and set spending limits to manage your budget. Bank card management tools also provide transaction history and details on any fees incurred, and some even allow you to view interest earned on linked savings accounts.</p>
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
-              </div>
-              <div>
-                <h2 class="section-title mb-3">03. Credit Management</h2>
-                <p>Mastering your credit is all about staying on top of your borrowing. Our credit management system makes it easy. Conveniently make payments, request new lines of credit, and review and sign contracts electronically. We also help you manage your repayment plan, ensuring you stay on track. Need to update your information or modify an existing credit line? Our system allows you to control your credit with ease, all while securely processing your payments.</p>
-
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
-              </div>
-              <div>
-                <h2 class="section-title mb-3">04. Transaction Management</h2>
-                <p> Our transaction management system puts you in control of your finances. You can easily check your account balance, request and receive money transfers , and track all incoming and outgoing funds with clear transaction history. Need to pay tuition? We've got you covered. Our system allows for transfers, filtering for specific transactions, and even exporting statements for easy record-keeping.</p>
-
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
     </section>
-
-
-
-
-
-
-    <section class="site-section testimonial-wrap" id="testimonials-section" data-aos="fade">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Happy Customers</h2>
-          </div>
-        </div>
-      </div>
-      <div class="slide-one-item home-slider owl-carousel">
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="../../assets/images/person_3.jpg" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>John Smith</p>
-              </figure>
-            </div>
-          </div>
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="../../assets/images/person_2.jpg" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Christine Aguilar</p>
-              </figure>
-
-            </div>
-          </div>
-
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="../../assets/images/person_4.jpg" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Robert Spears</p>
-              </figure>
-
-
-            </div>
-          </div>
-
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="../../assets/images/person_4.jpg" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Bruce Rogers</p>
-              </figure>
-
-            </div>
-          </div>
-
-        </div>
-    </section>
-
 
 
     <section class="site-section" id="about-section">

@@ -1,0 +1,32 @@
+.shadowed {
+  opacity: 0.3 !important;
+}
+
+.churn-container{
+  position: relative;
+  top: -300px;
+  left: 30%;
+  width: 50%;
+  height: 50%;
+}
+.disabled-results {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}

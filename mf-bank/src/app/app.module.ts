@@ -1,7 +1,6 @@
   import { APP_INITIALIZER, NgModule } from '@angular/core';
   import { BrowserModule } from '@angular/platform-browser';
   import { MatBadgeModule } from '@angular/material/badge';
-
   import { AppRoutingModule } from './app-routing.module';
   import { AppComponent } from './app.component';
   import { HomepageComponent } from './homepage/homepage.component';
@@ -15,24 +14,26 @@
   import { UpdateProfileComponent } from './update-profile/update-profile.component';
   import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
   import { SecurityService } from './services/security.service';
-import { AuthGuard } from './guard/auth.guard';
-import { VarComponent } from './var/var.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { UpdateUserComponent } from './update-user/update-user.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+  import { AuthGuard } from './guard/auth.guard';
+  import { VarComponent } from './var/var.component';
+  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+  import { HttpClientModule } from '@angular/common/http';
+  import { UpdateUserComponent } from './update-user/update-user.component';
+  import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+  import { MatProgressBarModule } from '@angular/material/progress-bar';
+  import { ChurnComponent } from './churn/churn.component';
 
 
 
   const routes: Routes = [
     { path: 'home', component: HomepageComponent},
     {path:'dashboard', component: DashboardComponent ,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
-    { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
-    { path: 'addUser', component: AdduserComponent },
-    { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
-    { path: 'updateProfile', component: UpdateProfileComponent,canActivate: [AuthGuard]},
-    { path: 'updateUser', component: UpdateUserComponent,canActivate: [AuthGuard]},
+    { path: 'users', component: UsersComponent,canActivate: [AuthGuard] , data: { roles: [ "EMPLOYEE"] }},
+    { path: 'addUser', component: AdduserComponent , data: { roles: [ "EMPLOYEE"] }},
+    { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] , data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
+    { path: 'updateProfile', component: UpdateProfileComponent,canActivate: [AuthGuard] , data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
+    { path: 'updateUser', component: UpdateUserComponent,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
+    { path: 'churn', component: ChurnComponent,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
     {path:"var",component:VarComponent},
     { path: '**', redirectTo:'home' }
   ];
@@ -80,7 +81,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
       UpdateProfileComponent,
       VarComponent,
       UpdateUserComponent,
-      UpdateUserComponent
+      UpdateUserComponent,
+      ChurnComponent
     ],
     imports: [
       BrowserModule,
