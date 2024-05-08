@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InternationalTransferDto } from '../models/InternationalTransferDto';
 import { InternationalTransferService } from '../services/international-transfer.service';
+import { validateamount } from '../shared/validators';
 
 @Component({
   selector: 'app-addinternational-transfer',
@@ -25,12 +26,18 @@ export class AddinternationalTransferComponent implements OnInit {
 
  ngOnInit(): void {
     this.transferForm = this.formBuilder.group({
-      bankAccountToMakeTransfert:['Choose a Bank Account'],
+      bankAccountToMakeTransfert:['', Validators.required],
       sendOrReceive: [''],
       objectofTransaction: [''],
-      amount: ['', Validators.required],
+      amount: ['', validateamount],
       currencyCode: ['', Validators.required]
     });
+    const amountControl = this.transferForm.get('amount');
+    if (amountControl) {
+      amountControl.setValidators(this.validateamount);
+    }
+
+    this.transferForm.get('amount')?.setValidators(this.validateamount);
     
   }
   onSubmit(): void {
@@ -55,6 +62,12 @@ export class AddinternationalTransferComponent implements OnInit {
       this.transferForm.markAllAsTouched();
     }
   }
-
+  validateamount(control: AbstractControl): ValidationErrors | null {
+    const amount = control.value;
+    if (amount !== null && amount < 0) {
+      return { negativeamount: true };
+    }
+    return null;
+  }
 
 }

@@ -7,3 +7,10 @@ export function validatePositiveBalance(control: AbstractControl): ValidationErr
   }
   return null;
 }
+export function validateamount(control: AbstractControl): ValidationErrors | null {
+  const amount = control.value;
+  if (amount !== null && amount < 0) {
+    return { negativeamount: true };
+  }
+  return null;
+}

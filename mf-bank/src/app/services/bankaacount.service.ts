@@ -85,7 +85,7 @@ export class BankaacountService {
   }
 
   modifyBankAccount(bankAccountDto: BankAccountDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/modifyBankAccount`, bankAccountDto).pipe(
+    return this.http.put<void>(`${this.apiUrl}/modifybankaccount`, bankAccountDto).pipe(
       catchError(error => {
         console.error('Error modifying bank account:', error);
         throw new Error('Error modifying bank account');
