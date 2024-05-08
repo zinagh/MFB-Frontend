@@ -101,8 +101,12 @@ export class UsersService {
       );
   }
 
-  getAccountUtilizationRatio(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/getAccountUtilizationRatio`)
+  
+
+  getFeeIncomePerAccount(username: string): Observable<any> {
+    const params = new HttpParams().set('username', username);
+
+    return this.http.get<any>('${this.apiUrl}/getFeeIncomePerAccount, { params }')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('An error occurred:', error);
@@ -110,4 +114,5 @@ export class UsersService {
         })
       );
   }
+
 }

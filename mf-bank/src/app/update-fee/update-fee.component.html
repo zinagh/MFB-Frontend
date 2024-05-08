@@ -1,0 +1,76 @@
+<div class="shadowed" (click)="navigateTofees()">
+    <app-fees></app-fees>
+    </div>
+        <div class="updatef-container">
+          <div class="container-fluid py-4" style="width: 100%;">
+              <div class="row" style="width: 100%;">
+                <div class="col-md-8" style="width: 100%;">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="d-flex align-items-center">
+                        <div style="text-align: center;">
+                          <h2 style="color: #d63384 !important;">update Fee</h2>
+        
+                      </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="text-uppercase text-sm"></p>
+                      <form>
+    
+                        <div id="employeeForm">
+          
+                            <div class="row form-group">
+                              <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="titulaire">feeType</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="feeType" id="transactionFeeCurrentAccount" value="TRANSACTION_FEE_currentAccount">
+                                    <label class="form-check-label" for="transactionFeeCurrentAccount">Transaction Fee - Current Account</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="feeType" id="transactionFeeSavingsAccount" value="TRANSACTION_FEE_savingsAccount">
+                                    <label class="form-check-label" for="transactionFeeSavingsAccount">Transaction Fee - Savings Account</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="feeType" id="currencyConversionFee" value="CURRENCY_CONVERSION_FEE">
+                                    <label class="form-check-label" for="currencyConversionFee">Currency Conversion Fee</label>
+                                </div>
+
+                              </div>
+    
+                              <div class="row form-group">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                  <label class="text-black" for="titulaire">amountPercent</label>
+                                  <input type="number" id="fname" class="form-control">
+                                </div>
+                              </div>
+                            </div>
+                            
+                            
+          
+                            <div class="row form-group">
+          
+                              <div class="col-md-12">
+                                <label class="text-black" for="balance">description</label>
+                                <input type="text" id="email" class="form-control">
+                              </div>
+
+                            </div>
+      
+                           </div>
+          
+                         <div style="display: flex; justify-content: center;">
+                          <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">update</button>
+                      </div>
+          
+                      </form>
+                    </div>
+        
+                  </div>
+        
+                </div>
+              </div>
+              </div>
+              </div>
+        
+

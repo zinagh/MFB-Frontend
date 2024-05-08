@@ -1,0 +1,71 @@
+<div class="shadowed" (click)="navigateTointernationaltransfer()">
+    <app-international-transfer></app-international-transfer>
+    </div>
+        <div class="addinternational-container" style="position: absolute; top: 10%; left: 29%; width: 50%;">
+          <div class="container-fluid py-4" style="width: 90%;">
+              <div class="row" style="width: 100%;">
+                <div class="col-md-8" style="width: 100%;">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <div class="d-flex align-items-center">
+                        <div style="text-align: center;">
+                          <h2 style="color: #d63384 !important;">Add a new international transfer</h2>
+        
+                      </div>
+                      </div>
+                    </div>
+                   
+
+<div class="card-body">
+  <p class="text-uppercase text-sm">International Transfer Information</p>
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div id="employeeForm">
+      <div class="row form-group">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <label class="text-black" for="bankAccountToMakeTransfer">Bank Account To Make Transfer</label>
+          <input type="number" id="bankAccountToMakeTransfer" formControlName="bankAccountToMakeTransfert" class="form-control" >
+          <option class="text-danger" [selected] disabled>enter a specified bank account!</option>
+        </div>
+        <div class="col-md-6">
+          <label class="text-black">Send or Receive</label><br>
+          <input type="checkbox" id="sendOrReceive" name="sendOrReceive" formControlName="sendOrReceive">
+          <label for="sendOrReceive">Receive</label>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-6">
+          <label class="text-black" for="objectOfTransaction">Transfer Description</label>
+          <input type="text" id="objectOfTransaction" formControlName="objectofTransaction" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="text-black" for="amount">Amount</label>
+          <input type="number" id="amount" class="form-control" formControlName="amount">
+          <div *ngIf="transferForm.get('amount')?.invalid && (transferForm.get('amount')?.dirty || transferForm.get('amount')?.touched)" class="text-danger">
+            <div *ngIf="transferForm.get('amount')?.errors?.['required']">amount is required.</div>
+            <div *ngIf="transferForm.get('amount')?.errors?.['negativeamount']">amount is below 0.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <label class="text-black" for="currencyCode">Currency Code</label>
+          <input type="text" id="currencyCode" formControlName="currencyCode" class="form-control">
+          <option class="text-danger" [selected] disabled>specify currency!</option>
+        </div>
+        
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <button type="submit" class="btn btn-primary btn-sm" style="width: 160px;">Add</button>
+    </div>
+  </form>
+</div>
+
+        
+                  </div>
+        
+                </div>
+              </div>
+              </div>
+              </div>
+        

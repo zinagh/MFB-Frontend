@@ -1,0 +1,133 @@
+<app-base></app-base>
+
+<div  class="internationaltransfer container-fluid py-4">
+    <div style="margin-bottom: 5px;">
+        <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/addinternationaltransfer" > Add international transfer</a>
+      </div>
+     
+      <svg width="190%" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" routerLink="/internationaltransfermanagement"   >
+        <title>internationaltransfer</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-2169.000000, -745.000000)" fill="#d63384" fill-rule="nonzero">
+            <g transform="translate(1716.000000, 291.000000)">
+              <g transform="translate(453.000000, 454.000000)">
+                <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>  
+    
+<div class="col-12">
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+            <div class="d-flex justify-content-between align-items-center">
+  
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h6>international transfers</h6>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BankAccount-To-MakeTransfert</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Send OR Receive</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Object</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Approval</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employee</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Amount</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CurrencyCode</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fees</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">internationnalFees</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" colspan="2">Actions</th>
+                <th class="text-secondary opacity-7"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container>
+                <tr *ngFor="let internationaltransfer of internationaltransfers">
+                    <td>{{ internationaltransfer.id }}</td>
+                    <td>{{ internationaltransfer.bankAccountToMakeTransfert }}</td>
+                    <td>{{ internationaltransfer.sendOrReceive ? 'Receive' : 'Send' }}</td>
+                    <td>{{ internationaltransfer.objectofTransaction }}</td>
+                    <td class="align-middle">
+                      <div class="d-flex justify-content-center align-items-center flex-column">
+                        <a class="btn btn-medium mt-2" (click)="approveTransfer(internationaltransfer.employeeApprovalUsername, internationaltransfer.id)"
+                        [ngClass]="{'btn-success': internationaltransfer.approval, 'btn-danger': !internationaltransfer.approval}">
+                          {{ internationaltransfer.approval ? 'Approved' : 'Not Approved' }}
+                        </a>
+                      </div>
+                    </td>
+                    <td>{{ internationaltransfer.employeeApprovalUsername }}</td>
+                    <td>{{ internationaltransfer.amount }} TND</td>
+                    <td>{{ internationaltransfer.currencyCode }}</td>
+                    <td>{{ internationaltransfer.fees }}</td>
+                    <td>{{ internationaltransfer.status }}</td>
+                    <td>{{ internationaltransfer.internationnalFees }}</td>
+                    <td>{{ internationaltransfer.date | date }}</td>
+                    <td class="text-center" (click)="confirmDelete(internationaltransfer.id)" style="cursor: pointer;" >
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+                    
+                                    
+                  <td class="align-middle">
+                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                      <i class="fas fa-pencil-alt"></i> &nbsp; &nbsp; &nbsp;
+                     
+                    </a>
+                  </td>
+                </tr>
+              </ng-container>
+              <tr>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm"></h6>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p class="text-xs font-weight-bold mb-0"></p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-success"></span>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold"></span>
+                </td>
+                
+                <td class="align-middle">
+                  <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"></a>
+                </td>
+             
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+
+
