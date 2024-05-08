@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2>Repayment Plans</h2>
+  <button (click)="exportToExcel()" class="btn btn-pink">Export All to Excel</button>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Due Date</th>
+          <th>Starting Balance</th>
+          <th>Starting Balance Reimbursement Amount</th>
+          <th>Repayment of Capital</th>
+          <th>Remaining Due Balance</th> <!-- Assuming you have this data -->
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plan of repaymentPlans$ | async">
+          <td>{{ plan.id }}</td>
+          <td>{{ plan.dueDate | date }}</td>
+          <td>{{ plan.startingBalance | currency }}</td>
+          <td>{{ plan.startingBalanceReimbursementAmount | number:'1.2-2' }}</td>
+          <td>{{ plan.repaymentOfCapital | number:'1.2-2' }}</td>
+          <td>{{ plan.remainingDueBalance | currency }}</td> <!-- Assuming you have this data -->
+          <td>
+            <button (click)="onSelectRepaymentPlan(plan.id)" class="btn btn-sm btn-pink">Select</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a class="btn btn-outline-primary btn-sm mb-0" routerLink="/Credit">Return to Credit</a> 
+    <a class="btn btn-outline-primary btn-sm mb-0" routerLink="/calculate">Return to Calculate</a> 
+
+  </div>
+</div>

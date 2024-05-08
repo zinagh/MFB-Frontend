@@ -1,0 +1,95 @@
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #ff69b4; /* Pink color */
+}
+
+.credits-list {
+  margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.btn {
+  background-color: #ff69b4; /* Pink color */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-pink {
+  background-color: #ff69b4; /* Pink color */
+}
+
+.btn-pink:hover {
+  background-color: #ff1493; /* Lighter shade of pink on hover */
+}
+
+.btn-sm {
+  font-size: 12px;
+}
+.button {
+  background-color: #ff69b4; /* Rose */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-pink {
+  background-color: #ff69b4; /* Rose */
+}
+
+.button-pink:hover {
+  background-color: #ff1493; /* Nuance plus claire de rose au survol */
+}
+/* Base style for all filter buttons */
+.filter-button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Individual styles for each button in shades of pink */
+.btn-primary {
+  background-color: #ff66b3; /* Primary pink */
+}
+
+.btn-danger {
+  background-color: #e83e8c; /* Slightly darker pink */
+}
+
+.btn-warning {
+  background-color: #ff85c0; /* Lighter pink */
+}
+
+.btn-primary:hover, .btn-danger:hover, .btn-warning:hover {
+  opacity: 0.9; /* Reduce opacity on hover for effect */
+}

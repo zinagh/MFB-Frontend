@@ -1,0 +1,50 @@
+<h1 class="title">Liste des contrats</h1>
+<!-- src/app/components/contract/contract.component.html -->
+<div class="search-container">
+    <h2>Search for a Contract</h2>
+    <div class="form-group">
+      <label for="attributeName">Attribute Name:</label>
+      <input id="attributeName" type="text" [(ngModel)]="attributeName" placeholder="Attribute name" class="form-control" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="attributeValue">Attribute Value:</label>
+      <input id="attributeValue" type="text" [(ngModel)]="attributeValue" placeholder="Attribute value" class="form-control" required>
+    </div>
+  
+    <button (click)="searchContract()" class="btn btn-primary">Search</button>
+  
+    <!-- Display results if contracts are available -->
+    <div *ngIf="contracts && contracts.length > 0; else noResults">
+      <h3>Contract Details</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contract Reference</th>
+            <th>User First Name</th>
+            <th>User Last Name</th>
+            <th>Residence Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contract of contracts">
+            <td>{{ contract.id }}</td>
+            <td>{{ contract.contractReference || 'N/A' }}</td>
+            <td>{{ contract.userFirstName || 'N/A' }}</td>
+            <td>{{ contract.userLastName || 'N/A' }}</td>
+            <td>{{ contract.residenceLocation || 'N/A' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/addCredit">retour ajout Credit</a> 
+
+    </div>
+  
+    <!-- No results or error message template -->
+    <ng-template #noResults>
+      <div class="alert alert-danger">
+        No contracts found or an error occurred.
+      </div>
+    </ng-template>
+  </div>

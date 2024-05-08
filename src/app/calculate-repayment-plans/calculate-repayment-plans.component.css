@@ -1,0 +1,22 @@
+.text-pink {
+    color: #ff69b4; /* Or any pink shade you prefer */
+  }
+  
+  .btn-pink {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+  }
+  
+  .btn-pink:hover {
+    background-color: #ff85c0;
+  }
+  
+  .bg-white {
+    background-color: white;
+  }
+  
+  .card {
+    border-radius: 8px;
+  }
+  

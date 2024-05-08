@@ -1,0 +1,46 @@
+<div class="container">
+    <h2 style="color: pink;">Plans de Remboursement</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="creditAmount">Montant du Crédit:</label>
+        <input type="number" id="creditAmount" formControlName="creditAmount" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="annualInterestRate">Taux d'Intérêt Annuel:</label>
+        <input type="number" id="annualInterestRate" formControlName="annualInterestRate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="creditDurationInYears">Durée du Crédit (en années):</label>
+        <input type="number" id="creditDurationInYears" formControlName="creditDurationInYears" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="creditStartDate">Date de Début du Crédit:</label>
+        <input type="date" id="creditStartDate" formControlName="creditStartDate" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-pink">Calculer</button>
+    </form>
+  
+    <div *ngIf="repaymentPlans.length > 0">
+      <h3 style="color: pink;">Plans de Remboursement Calculés:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Montant du Remboursement</th>
+            <th>Capital Restant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let plan of repaymentPlans; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ plan.date | date }}</td>
+            <td>{{ plan.repaymentAmount }}</td>
+            <td>{{ plan.remainingCapital }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <a class="btn btn-outline-primary btn-sm mb-0" routerLink="/Credit">Return to Credit</a> 

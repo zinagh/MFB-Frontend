@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Credits</h2>
+
+  <!-- PDF download section -->
+  <div class="form-list__row" style="margin-bottom: 20px;">
+    <button (click)="downloadPDF()" class="button button-pink">Download PDF</button>
+    <a *ngIf="pdfDownloadLink" [href]="pdfDownloadLink" download="Credit_Details.pdf">Download Link</a>
+  </div>
+
+  <!-- QR Code display -->
+  <div *ngIf="qrCodeLink">
+    <!-- Ensure the QR code component is correctly referenced and configured -->
+    <qrcode [qrdata]="qrCodeLink" [width]="200"></qrcode>
+  </div>
+
+  <!-- Filter buttons section -->
+  <div class="filter-section" style="margin-bottom: 20px;">
+    <button (click)="filterCreditsByStatus('approved')" class="filter-button btn-primary">Approuvés</button>
+    <button (click)="filterCreditsByStatus('rejected')" class="filter-button btn-danger">Rejetés</button>
+    <button (click)="filterCreditsByStatus('pending')" class="filter-button btn-warning">En attente</button>
+  </div>
+
+  <!-- Credits list section -->
+  <div class="credits-list">
+    <ul *ngIf="credits$ | async as credits; else noData">
+      <li *ngFor="let credit of credits">
+        <span>{{ credit.creditType }}</span>
+        <span>{{ credit.status }}</span>
+        <span>{{ credit.amount }}</span>
+        <span>{{ credit.duration }}</span>
+        <span>{{ credit.firstname }}</span>
+        <span>{{ credit.lastname }}</span>
+        <span>{{ credit.location }}</span>
+        <button class="btn btn-sm btn-pink" [routerLink]="['/Modify', credit.id]">Modify</button>
+        <button class="btn btn-sm btn-pink" (click)="deleteCreditConfirmation(credit.id)">Delete</button>
+      </li>
+    </ul>
+    <ng-template #noData><p>No credits available for this filter.</p></ng-template>
+  </div>
+
+  <!-- Navigation button -->
+  <a class="btn btn-outline-primary btn-sm mb-0" routerLink="/Credit">Return to Credit</a>
+</div>

@@ -1,0 +1,39 @@
+<!-- modify-credit.component.html -->
+
+<div class="card">
+    <div class="modal__featured">
+      <a href="/AffichageCredit" class="button--transparent button--close"></a>
+    </div>
+  
+    <div>
+      <h2 class="text-primary">Modifier le crédit</h2>
+      <div *ngIf="creditToModify">
+        <form (ngSubmit)="modifyCredit()">
+          <div class="form-group">
+            <label for="creditType" class="text-primary">Type de crédit:</label>
+            <input type="text" id="creditType" name="creditType" [(ngModel)]="creditToModify.creditType" class="form-control">
+          </div>
+  
+          <div class="form-group">
+            <label for="creditStatus" class="text-primary">Statut du crédit:</label>
+            <input type="text" id="creditStatus" name="creditStatus" [(ngModel)]="creditToModify.creditStatus" class="form-control">
+          </div>
+  
+          <div class="form-group">
+            <label for="creditAmount" class="text-primary">Montant du crédit:</label>
+            <input type="number" id="creditAmount" name="creditAmount" [(ngModel)]="creditToModify.creditAmount" class="form-control">
+          </div>
+  
+          <div class="form-group">
+            <label for="creditDuration" class="text-primary">Durée du crédit:</label>
+            <input type="number" id="creditDuration" name="creditDuration" [(ngModel)]="creditToModify.creditDuration" class="form-control">
+          </div>
+  
+          <button type="submit" class="button-primary">Modifier le crédit</button>
+        </form>
+  
+        <a class="button-primary" routerLink="/Credit">Retourner au crédit</a>
+      </div>
+    </div>
+  </div>
+  
