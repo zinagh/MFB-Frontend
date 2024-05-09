@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidatorFn, ValidationErrors } from "@angular/forms";
 
  export function validateDateOfBirth(control: AbstractControl): { [key: string]: boolean } | null {
   if (control.value) {
@@ -34,5 +34,22 @@ import { AbstractControl, ValidatorFn } from "@angular/forms";
     // Return validation result
     return isValid ? null : { 'invalidPassword': true };
   };
+ }
 
+ export function validatePositiveBalance(control: AbstractControl): ValidationErrors | null {
+  const balance = control.value;
+  if (balance !== null && balance < 0) {
+    return { negativeBalance: true };
+  }
+  return null;
 }
+
+export function validateamount(control: AbstractControl): ValidationErrors | null {
+  const amount = control.value;
+  if (amount !== null && amount < 0) {
+    return { negativeamount: true };
+  }
+  return null;
+}
+
+

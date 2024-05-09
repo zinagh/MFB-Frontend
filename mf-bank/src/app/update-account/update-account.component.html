@@ -1,0 +1,53 @@
+<div class="shadowed" (click)="navigateToAccount()">
+  <app-account-management></app-account-management>
+  </div>
+  <div class="updateAccount-container">
+
+    <div class="container-fluid py-6" style="width: 100%;">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-8" style="width: 100%;">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <div style="text-align: center;">
+                  <h2 style="color: #d63384 !important;"> Update Account</h2>
+
+              </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+          <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+
+              <div id="employeeForm">
+                  
+                    <div class="col-md-6">
+                      <label class="text-black" for="account_balance">account_balance</label>
+                      <input type="text" id="account_balance" formControlName="account_balance" class="form-control">
+                    </div>
+                    <div class="">
+                      <div class="col-md-6">
+                        <label for="activated">Activation :</label>
+                         <input type="checkbox" id="activated" formControlName="activated" [ngClass]="{ 'green-checkbox': activated.value, 'red-checkbox': !activated.value }">
+                      </div>
+                    </div>
+
+                  
+
+              </div>
+
+               <div style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary btn-sm " style="width: 160px; ">Update Account</button>
+            </div>
+
+          </form>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      </div>
+
+  </div>

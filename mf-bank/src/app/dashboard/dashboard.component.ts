@@ -5,32 +5,58 @@ import { SecurityService } from '../services/security.service';
 import { Observable, catchError, forkJoin, map, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Userdto } from '../models/Userdto';
+import { InternationalTransferService } from '../services/international-transfer.service';
+import { BankaacountService } from '../services/bankaacount.service';
+import { BankAccountDto } from '../models/BankAccountDto';
 
 @Component({
+
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  public chart: any;
   isSpecificUser: boolean=false;
   debounceTimer: any;
   user!: Userdto;
   users!: Userdto[];
-  selectedUser:string = "Select User";
+  isEmployee: boolean = true;
   accountUtilization!: number;
   utilizationRatio!: number;
   accountActivity!: number;
+  accountBalance!: number;
   FeeIncomePerAccount!: any;
+  selectedUser:string = "Select User";
 
-  constructor(private usersService: UsersService, public securityService: SecurityService) {}
+
+  constructor(private usersService: UsersService, public securityService: SecurityService,
+    public interTrans: InternationalTransferService, private bankservice: BankaacountService
+  ) {
+    const currentDate = new Date();
+    this.selectedMonth = currentDate.getMonth() + 1;
+
+  }
   clientUserName!: string;
   username!: string;
 
   @ViewChild('chartLine') chartLine!: ElementRef;
   lineChart: Chart | null = null;
+  isThisEmployee: boolean = this.securityService.hasRoleIn(['EMPLOYEE']);
+  getAccountActivityRatio(): void {
+    this.usersService.getAccountUtilizationRatio()
+      .subscribe(data => {
+        this.accountActivity = data / 100;
+        console.log("heyyyy:" + this.accountActivity)
 
-  isEmployee: boolean = this.securityService.hasRoleIn(['EMPLOYEE']);
-
+      });
+  }
+  getAccountUtilization(): void {
+    this.usersService.getAccountUtilizationRatio()
+      .subscribe(data => {
+        this.accountUtilization = data / 100;
+      });
+  }
 
   ngOnInit(): void {
     if (this.securityService.profile && this.securityService.profile.username) {
@@ -43,22 +69,9 @@ export class DashboardComponent implements OnInit {
     this.createLineChart(this.username);
     this.retrieveAllUsers();
     this.hgetFeeIncomePerAccount();
-  }
+    this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
+    this.createChart();
 
-  getAccountUtilization(): void {
-    this.usersService.getAccountUtilizationRatio()
-      .subscribe(data => {
-        this.accountUtilization = data / 100;
-      });
-  }
-
-  getAccountActivityRatio(): void {
-    this.usersService.getAccountUtilizationRatio()
-      .subscribe(data => {
-        this.accountActivity = data / 100;
-        console.log("heyyyy:" + this.accountActivity)
-
-      });
   }
 
   theTotal!: number;
@@ -92,14 +105,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  onUserSelect(event: any): void {
-    const selectedValue: string | null = event?.target?.value;
-  if (selectedValue) {
-    console.log("selected user " +selectedValue )
-    if (this.lineChart) {
-      this.lineChart.destroy();
-      console.log("chart destroyd");
-
+userforstat!:string;
+selectedUserr!: string;
+onUserSelect(event: any): void {
+  const selectedValue: string | null = event?.target?.value;
+if (selectedValue) {
+  this.userforstat = selectedValue;
+  this.selectedUserr = selectedValue;
+  this.retrieveAccountBalance(this.selectedUserr);
+  this.loadBankaccountByTitulaire(this.userforstat, this.selectedMonth);
+  if (this.lineChart) {
+    this.lineChart.destroy();
+    console.log("chart destroyd");
     }
 
    this.createLineChart(selectedValue);
@@ -244,8 +261,6 @@ export class DashboardComponent implements OnInit {
 getPercentageOutgoingTransfers(username: string) {
   return  this.usersService.getPercentageOutgoingTransfers(username);
 }
-
-
 getFeeIncomePerAccount(username: string): Observable<number[]> {
   return  this.usersService.getFeeIncomePerAccount(username).pipe(
     map(response => response[Object.keys(response)[0]]),
@@ -256,4 +271,79 @@ getFeeIncomePerAccount(username: string): Observable<number[]> {
   );
 }
 
+
+
+
+bankaccount!: BankAccountDto;
+loadBankaccountByTitulaire(name: string, month: number) :void {
+  this.bankservice.retrieveBankAccountByTitulaire(name).subscribe(data  => {
+    this.bankaccount = data;
+    if(this.bankaccount.accountNumber){
+      console.log(this.bankaccount);
+    this.getstatisticsForChart(this.bankaccount.accountNumber, month);
+  }
+  });
 }
+
+statics!: number[];
+getstatisticsForChart(bankaccountId: string, month: number ) :void {
+
+  this.interTrans.getStatisticsForChart(bankaccountId, month).subscribe(data  => {
+   this.statics = data;
+   console.log(bankaccountId + " " + month + " " + this.statics);
+   this.createChart();
+  });
+}
+
+selectedMonth: number;
+months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+onMonthChange(event: any): void {
+  const selectedIndex = (event.target as HTMLSelectElement).selectedIndex;
+  this.selectedMonth = selectedIndex + 1;
+  if(this.userforstat){
+  this.loadBankaccountByTitulaire(this.userforstat, this.selectedMonth);
+} else {
+  this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
+}
+  }
+
+  createChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart("pieChart", {
+      type: 'pie',
+      data: {
+        labels: ['Receive', 'Send'],
+        datasets: [{
+          data:this.statics,
+          backgroundColor: [
+            '#cb0c9f',
+            '#82d616'
+
+          ],
+          hoverOffset: 4
+        }
+       ]
+      },
+      options: {
+        aspectRatio: 2.5
+      }
+    });
+  }
+
+
+  retrieveAccountBalance(bankAccountTitulaire: string): void {
+    this.bankservice.retrieveAccountBalance(bankAccountTitulaire)
+      .subscribe(
+        balance => {
+          this.accountBalance = balance;
+        },
+        error => {
+          console.error('Error retrieving account balance:', error);
+        }
+      );
+  }
+
+      }

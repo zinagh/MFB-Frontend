@@ -123,24 +123,18 @@ export class UsersService {
   }
   getAccountUtilizationRatio(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/getAccountUtilizationRatio`)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('An error occurred:', error);
-          return throwError(error);
-        })
-      );
   }
 
 
-  predict(inputData: ModelInput): Observable<any> {
-    return this.http.post<any>(this.apiUrlF + "/predict", inputData);
-  }
+predict(inputData: ModelInput): Observable<any> {
+  return this.http.post<any>(this.apiUrlF + "/predict", inputData);
+}
 
 
 
-  getNews(): Observable<Article[]> {
-    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', '1');
+getNews(): Observable<Article[]> {
+  const headers = new HttpHeaders().set('ngrok-skip-browser-warning', '1');
 
-    return this.http.get<Article[]>(this.apiUrlA + "/api/scrape_news", { headers });
-  }
+  return this.http.get<Article[]>(this.apiUrlA + "/api/scrape_news", { headers });
+}
 }

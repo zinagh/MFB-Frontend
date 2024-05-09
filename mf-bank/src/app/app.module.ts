@@ -22,20 +22,43 @@
   import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   import { MatProgressBarModule } from '@angular/material/progress-bar';
   import { ChurnComponent } from './churn/churn.component';
+  import { BankAccountComponent } from './bank-account/bank-account.component';
+  import { AddbankAcComponent } from './addbank-ac/addbank-ac.component';
+  import { AccountManagementComponent } from './account-management/account-management.component';
+  import { UpdateAccountComponent } from './update-account/update-account.component';
+  import { InternationalTransferComponent } from './international-transfer/international-transfer.component';
+  import { AddinternationalTransferComponent } from './addinternational-transfer/addinternational-transfer.component';
+  import { InternationaltransferManagementComponent } from './internationaltransfer-management/internationaltransfer-management.component';
+  import { FeesComponent } from './fees/fees.component';
+  import { UpdateInternationaltransferComponent } from './update-internationaltransfer/update-internationaltransfer.component';
+  import { AddfeeComponent } from './addfee/addfee.component';
+  import { UpdateFeeComponent } from './update-fee/update-fee.component';
+  import { BankaacountService } from './services/bankaacount.service';
 
 
 
   const routes: Routes = [
     { path: 'home', component: HomepageComponent},
-    {path:'dashboard', component: DashboardComponent ,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
-    { path: 'users', component: UsersComponent,canActivate: [AuthGuard] , data: { roles: [ "EMPLOYEE"] }},
-    { path: 'addUser', component: AdduserComponent , data: { roles: [ "EMPLOYEE"] }},
-    { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] , data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
-    { path: 'updateProfile', component: UpdateProfileComponent,canActivate: [AuthGuard] , data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
+    {path:'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
+    { path: 'users', component: UsersComponent,canActivate: [AuthGuard]  },
+    { path: 'addUser', component: AdduserComponent  ,canActivate: [AuthGuard]},
+    { path: 'profile', component: ProfileComponent  ,canActivate: [AuthGuard]},
+    { path: 'updateProfile', component: UpdateProfileComponent  ,canActivate: [AuthGuard]},
     { path: 'updateUser', component: UpdateUserComponent,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
+    { path: 'bankaccount', component: BankAccountComponent  ,canActivate: [AuthGuard]},
+    { path: 'addBankAccount', component: AddbankAcComponent  ,canActivate: [AuthGuard]},
+    { path: 'accountManagement', component: AccountManagementComponent  ,canActivate: [AuthGuard]},
+    { path: 'updateAccount', component: UpdateAccountComponent  ,canActivate: [AuthGuard]},
+    { path: 'internationaltransfer', component: InternationalTransferComponent ,canActivate: [AuthGuard] },
+    { path: 'addinternationaltransfer', component: AddinternationalTransferComponent ,canActivate: [AuthGuard] },
+    { path: 'internationaltransfermanagement', component: InternationaltransferManagementComponent  ,canActivate: [AuthGuard]},
+    { path: 'updateinternationaltransfer', component: UpdateInternationaltransferComponent ,canActivate: [AuthGuard] },
+    { path: 'fees', component: FeesComponent  ,canActivate: [AuthGuard]},
     { path: 'churn', component: ChurnComponent,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
     {path:"var",component:VarComponent},
-    { path: '**', redirectTo:'home' }
+    { path: 'addfee', component: AddfeeComponent ,canActivate: [AuthGuard] },
+    { path: 'updatefee', component: UpdateFeeComponent ,canActivate: [AuthGuard] },
+    { path: '**', redirectTo: 'home' }
   ];
 
   export function initializeKeycloak(kcService: KeycloakService, securityService: SecurityService,router: Router) {
@@ -82,8 +105,19 @@
       VarComponent,
       UpdateUserComponent,
       UpdateUserComponent,
-      ChurnComponent
-    ],
+      ChurnComponent,
+      BankAccountComponent,
+      AddbankAcComponent,
+      AccountManagementComponent,
+      UpdateAccountComponent,
+      InternationalTransferComponent,
+      AddinternationalTransferComponent,
+      InternationaltransferManagementComponent,
+      UpdateInternationaltransferComponent,
+      FeesComponent,
+      AddfeeComponent,
+      UpdateFeeComponent
+      ],
     imports: [
       BrowserModule,
       RouterModule.forRoot(routes),
@@ -94,9 +128,16 @@
       FormsModule,
       BrowserAnimationsModule,
       MatProgressBarModule,
-      MatBadgeModule
-    ],
+      MatBadgeModule,
+      BrowserModule,
+      RouterModule.forRoot(routes),
+      AppRoutingModule,
+      FormsModule,
+      HttpClientModule,
+      KeycloakAngularModule
+      ],
     providers: [
+      BankaacountService,
       KeycloakService,
       SecurityService,
       {
@@ -108,4 +149,3 @@
     bootstrap: [AppComponent]
   })
   export class AppModule { }
-

@@ -1,0 +1,11 @@
+.shadowed {
+    opacity: 0.3 !important;
+  }
+  
+  .updatef-container{
+    position: relative;
+    top: -300px;
+    left: 30%;
+    width: 50%;
+    height: 50%;
+  }
