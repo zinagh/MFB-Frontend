@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BankAccountDto } from '../models/BankAccountDto';
 import { BankaacountService } from '../services/bankaacount.service';
 import { SecurityService } from '../services/security.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-management',
@@ -12,21 +12,28 @@ import { Router } from '@angular/router';
 export class AccountManagementComponent implements OnInit{
 
   constructor(private bankservice: BankaacountService, public securityService: SecurityService,
-    private router: Router
+    private router: Router, private route: ActivatedRoute
   ) { }
 
   username!: string;
+  bankaccountNumber!: string;
   bankAccount!: BankAccountDto;
+  isThisEmployee: boolean = this.securityService.hasRoleIn(['EMPLOYEE']);
+
 ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.bankaccountNumber = params['id'];
+  });
+
   if (this.securityService.profile && this.securityService.profile.username) {
     this.username = this.securityService.profile.username;
     console.log(this.username);
   }
-  this.retrieveByUsername(this.username);
+  this.retrieveByAccountNumber(this.bankaccountNumber);
   }
 
-  retrieveByUsername(userW: string){
-    this.bankservice.retrieveBankAccountByTitulaire(userW).subscribe(
+  retrieveByAccountNumber(accountNumber: string){
+    this.bankservice.retrieveBankAccount(accountNumber).subscribe(
     (data) => {
         this.bankAccount = data;
         console.log(this.bankAccount);

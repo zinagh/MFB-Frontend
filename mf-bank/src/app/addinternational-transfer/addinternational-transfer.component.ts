@@ -27,7 +27,7 @@ export class AddinternationalTransferComponent implements OnInit {
  ngOnInit(): void {
     this.transferForm = this.formBuilder.group({
       bankAccountToMakeTransfert:['', Validators.required],
-      sendOrReceive: [''],
+      sendOrReceive: false,
       objectofTransaction: [''],
       amount: ['', validateamount],
       currencyCode: ['', Validators.required]
@@ -38,16 +38,20 @@ export class AddinternationalTransferComponent implements OnInit {
     }
 
     this.transferForm.get('amount')?.setValidators(this.validateamount);
-    
+
   }
   onSubmit(): void {
+    const transfer: InternationalTransferDto = this.transferForm.value;
+console.log(this.transferForm.value);
+console.log(this.transferForm.get('bankAccountToMakeTransfert')?.value);
+
     if (this.transferForm.valid) {
       const date = new Date();
-      const transfer: InternationalTransferDto = this.transferForm.value;  
+      const transfer: InternationalTransferDto = this.transferForm.value;
       transfer.status = "Pending";
       transfer.date = date;
-      console.log(transfer);
-      
+      console.log(this.transferForm.value);
+
       this.trasnferservice.addInternationalTransfer(transfer).subscribe(
         (response) => {
           console.log('transfer added successfully:', response);
@@ -57,10 +61,10 @@ export class AddinternationalTransferComponent implements OnInit {
         (error) => {
           console.error('Failed to add transfer:', error);
         }
-      ); 
+      );
     } else {
       this.transferForm.markAllAsTouched();
-    }
+    } 
   }
   validateamount(control: AbstractControl): ValidationErrors | null {
     const amount = control.value;

@@ -263,26 +263,31 @@
 
         <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">News & Insights</h2>
+            <h1 class="section-title mb-3" data-aos="fade-up" data-aos-delay="" style="font-size: 40px;">News & Insights</h1>
           </div>
         </div>
+
+        <div class="row">
         <div class="article-container">
           <div class="article-wrapper" *ngIf="newsData.length > 0">
             <div class="article" style="cursor: pointer;">
-              <a href="https://www.cnbc.com/finance/">
               <img [src]="newsData[currentIndex].image_url" alt="Article Image">
               <div (click)="prevArticle()" class="arrow left-arrow">&larr;</div>
               <div (click)="nextArticle()" class="arrow right-arrow">&rarr;</div>
               <div class="article-details">
+                <a href="https://www.cnbc.com/finance/">
                 <h3>{{ newsData[currentIndex].title }}</h3>
                 <p>Author: {{ newsData[currentIndex].author }}</p>
+                </a>
                 <p>Published: {{ newsData[currentIndex].time }}</p>
               </div>
-            </a>
+
             </div>
           </div>
         </div>
-
+        <div class="article-container-right">
+        </div>
+      </div>
     </section>
 
 

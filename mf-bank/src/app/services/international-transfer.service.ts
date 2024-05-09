@@ -87,4 +87,14 @@ export class InternationalTransferService {
   }
 
 
+
+  retrieveAllInternationalTransfersByTitulaireAccount(username: string): Observable<InternationalTransferDto[]> {
+    return this.http.get<InternationalTransferDto[]>(this.apiUrl+ "/retrieveAllInternationalTransfersByTitulaireAccount/" + username ).pipe(
+      catchError(error => {
+        console.error('Error retrieving international transfers:', error);
+        throw new Error('Error retrieving international transfers');
+      })
+    );
+  }
+
 }

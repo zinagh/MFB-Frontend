@@ -32,7 +32,7 @@ export class UpdateAccountComponent  implements OnInit{
       activated: ['']
     });
     this.retrieveByAccountNumber();
-    
+
   }
   navigateToAccount(){
     this.router.navigate(['/accountManagement']);
@@ -48,7 +48,7 @@ export class UpdateAccountComponent  implements OnInit{
           account_balance: this.bankAccount.account_balance,
           activated: this.bankAccount.activated
         });
-    
+
       },
       (error: any) => {
         console.error('Error retrieving bank account by titulaire:', error);
@@ -56,9 +56,22 @@ export class UpdateAccountComponent  implements OnInit{
     );
   }
 
-  onSubmit(){
-    
+  accountManagement(accountNumber: string | undefined) {
+    if (accountNumber) {
+      this.router.navigate(['/accountManagement', { id: accountNumber }]);
+    }}
 
+  onSubmit(){
+    this.bankAccount.account_balance = this.accountForm.get('account_balance')?.value || this.bankAccount.account_balance;
+    this.bankAccount.activated = this.accountForm.get('activated')?.value || false;
+    this.bankservice.modifyBankAccount(this.bankAccount).subscribe(
+      (data) => {
+          this.accountManagement(this.bankAccount.accountNumber);
+        },
+        (error: any) => {
+          console.error('Error retrieving bank account by titulaire:', error);
+        }
+      );
   }
 
 }

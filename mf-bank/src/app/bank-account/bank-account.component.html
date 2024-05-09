@@ -4,8 +4,9 @@
     <div style="margin-bottom: 5px;">
         <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/addBankAccount" > Add Bank Account</a>
       </div>
-     
-      <svg width="190%" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" routerLink="/accountManagement"   >
+      <ng-container *ngIf="!isThisEmployee">
+
+      <svg style="cursor: pointer;" width="190%" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" (click)="navigateToMebankAccount()">
         <title>Bank Account</title>
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g transform="translate(-2169.000000, -745.000000)" fill="#d63384" fill-rule="nonzero">
@@ -17,13 +18,13 @@
             </g>
           </g>
         </g>
-      </svg>  
-    
+      </svg>
+</ng-container>
 <div class="col-12">
     <div class="card mb-4">
         <div class="card-header pb-0">
             <div class="d-flex justify-content-between align-items-center">
-  
+
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search..." (input)="onInputChange($event)">
                   <div class="btn btn-outline-secondary" type="button">
@@ -32,7 +33,7 @@
                 </div>
             </div>
         </div>
-  
+
     </div>
   </div>
 
@@ -51,13 +52,15 @@
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Activated</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employee</th>
+                <ng-container *ngIf="isThisEmployee">
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Creation</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Balance</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N.Solde Allowed</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N.Solde Amount</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N.Solde Depass</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N.Solde Depass Day</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" colspan="2">Actions</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" colspan="3">Actions</th>
+                </ng-container>
               </tr>
             </thead>
             <tbody>
@@ -68,22 +71,40 @@
                   <td>{{bank.type}} </td>
                   <td>{{ bank.activated }}</td>
                   <td>{{ bank.employeeUsername }}</td>
+                  <ng-container *ngIf="isThisEmployee">
                   <td>{{ bank.creation_date | date  }}</td>
                   <td>{{ bank.account_balance }} TND</td>
                   <td>{{ bank.negativeSoldeAllowed }}</td>
                   <td>{{ bank.negativeSoldeAmount }}</td>
                   <td>{{ bank.negativeSoldeDepassement }}</td>
                   <td>{{ bank.negativeSoldeDepassementDay | date }}</td>
-                  <td class="text-center" (click)="confirmDelete(bank.accountNumber)" style="cursor: pointer;" >
-                    <i class="fas fa-trash-alt"></i>
+
+<td style="cursor: pointer; margin-right: 5px !important;" (click)="accountManagement(bank.accountNumber)">
+  <svg width="20px" height="25px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-2169.000000, -745.000000)" fill="#d63384" fill-rule="nonzero">
+        <g transform="translate(1716.000000, 291.000000)">
+          <g transform="translate(453.000000, 454.000000)">
+            <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</td>
+
+
+                <td style="margin-left: 10px;"class="text-center" (click)="confirmDelete(bank.accountNumber)" style="cursor: pointer;" >
+                   <i class="fas fa-trash-alt"></i>
                 </td>
-                                  
+
                 <td class="align-middle">
                   <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     <i class="fas fa-pencil-alt"></i> &nbsp; &nbsp; &nbsp;
-                   
                   </a>
                 </td>
+                </ng-container>
               </tr>
             </ng-container>
 
@@ -94,6 +115,7 @@
                   <td>{{ bankaccount.type }}</td>
                   <td>{{ bankaccount.activated }}</td>
                   <td>{{ bankaccount.employeeUsername }}</td>
+                  <ng-container *ngIf="isThisEmployee">
                   <td>{{ bankaccount.creation_date | date  }}</td>
                   <td>{{ bankaccount.account_balance }} TND</td>
                   <td>{{ bankaccount.negativeSoldeAllowed }}</td>
@@ -102,16 +124,16 @@
                   <td>{{ bankaccount.negativeSoldeDepassementDay | date }}</td>
                   <td class="text-center" (click)="confirmDelete(bankaccount.accountNumber)" style="cursor: pointer;" >
                     <i class="fas fa-trash-alt"></i>
-              
+
                 </td>
-                  
+
                   <div class="d-flex px-2 py-1">
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-0 text-sm"></h6>
                     </div>
                   </div>
                   <p class="text-xs font-weight-bold mb-0"></p>
-                
+
                 <td class="align-middle text-center text-sm">
                   <span class="badge badge-sm bg-gradient-success"></span>
                 </td>
@@ -121,8 +143,9 @@
                 <td class="align-middle">
                   <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     <i class="fas fa-pencil-alt"></i>
-                  </a> 
+                  </a>
                 </td>
+                </ng-container>
               </tr>
             </ng-container>
 

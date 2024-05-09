@@ -1,3 +1,12 @@
+.row {
+  display: flex;
+}
+
+.article-container-right {
+  top: 20px;
+  overflow: hidden;
+  background-color: black;
+}
 .article-container {
 
   top: 20px;
@@ -6,6 +15,7 @@
   height: 800px; /* Fixed height */
   overflow: hidden;
   perspective: 1000px; /* Define perspective */
+  flex: 1; /* This will make it take up remaining space */
 }
 
 .article-wrapper {

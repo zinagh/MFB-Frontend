@@ -1,6 +1,6 @@
 import { UsersService } from './../services/users.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip } from 'chart.js';
+import {  LineController, CategoryScale, LinearScale, Title, Legend, PointElement, LineElement, Tooltip } from 'chart.js';
 import { SecurityService } from '../services/security.service';
 import { Observable, catchError, forkJoin, map, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { Userdto } from '../models/Userdto';
 import { InternationalTransferService } from '../services/international-transfer.service';
 import { BankaacountService } from '../services/bankaacount.service';
 import { BankAccountDto } from '../models/BankAccountDto';
-
+import { Chart } from 'chart.js/auto';
 @Component({
 
   selector: 'app-dashboard',
@@ -71,6 +71,8 @@ export class DashboardComponent implements OnInit {
     this.hgetFeeIncomePerAccount();
     this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
     this.createChart();
+    this.retrieveAccountBalance(this.username);
+    this.loadBankaccountByTitulaire(this.username, this.selectedMonth);
 
   }
 

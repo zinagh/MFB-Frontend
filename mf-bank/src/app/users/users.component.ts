@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit{
     }
       this.debounceTimer = setTimeout(() => {
       this.retrieveUser(this.username);
-    }, 2000);
+    }, 1000);
   }
 
   navigateToUpdate(){

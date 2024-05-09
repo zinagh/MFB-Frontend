@@ -8,7 +8,7 @@
 
           <h6 class="text-white font-weight-bolder ms-2"></h6>
         </nav>
-     
+
       </div>
     </nav>
     <!-- End Navbar -->
@@ -25,15 +25,16 @@
                  <div class="col-md-8 d-flex align-items-center justify-content-center">
                    <h6 class="mb-0">ACCOUNT INFORMATION</h6>
                  </div>
-                 
+                 <ng-container *ngIf="isThisEmployee">
                  <div class="col-md-12 text-end">
                    <a href="javascript:;">
                      <i class="fas fa-user-edit text-secondary text-sm ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Account" (click) = "navigateToupdate(bankAccount.accountNumber)"></i>
                  </a>
                  </div>
+                </ng-container>
                </div>
              </div>
-             
+
              <div class="card-body p-3">
                 <hr class="horizontal gray-light my-4">
                 <ul class="list-group" *ngIf="bankAccount">
@@ -74,22 +75,22 @@
                     <strong class="text-dark">Negative Solde Depassement Day:</strong> {{ bankAccount.negativeSoldeDepassementDay | date }}
                   </li>
                 </ul>
-                
- 
+
+
              </div>
-             
+
            </div>
          </div>
- 
- 
+
+
        </div>
- 
+
      </div>
       </div>
-      
+
     </div>
-  
-   
+
+
 
   </div>
 </div>
