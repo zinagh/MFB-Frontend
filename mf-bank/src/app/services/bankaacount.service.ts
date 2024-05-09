@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
 import { BankAccountDto } from '../models/BankAccountDto';
 import { Userdto } from '../models/Userdto';
+import { QuestionDto } from '../models/QuestionDto';
 
 
 @Injectable({
@@ -109,6 +110,15 @@ export class BankaacountService {
   }
 
 
+  generateQuestion(topic: string): Observable<QuestionDto> {
+    return this.http.get<QuestionDto>(this.apiUrl + "/generateQuestion/" + topic + "/1")
+      .pipe(
+        catchError((error: any) => {
+          console.error('An error occurred while retrieving bank accounts:', error);
+          throw error;
+        })
+      );
+  }
 
 
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TesthoussemComponent } from './testhoussem/testhoussem.component';
 
 const routes: Routes = [
 ];

@@ -15,7 +15,6 @@
   import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
   import { SecurityService } from './services/security.service';
   import { AuthGuard } from './guard/auth.guard';
-  import { VarComponent } from './var/var.component';
   import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   import { HttpClientModule } from '@angular/common/http';
   import { UpdateUserComponent } from './update-user/update-user.component';
@@ -34,13 +33,14 @@
   import { AddfeeComponent } from './addfee/addfee.component';
   import { UpdateFeeComponent } from './update-fee/update-fee.component';
   import { BankaacountService } from './services/bankaacount.service';
+import { QuizzComponent } from './quizz/quizz.component';
 
 
 
   const routes: Routes = [
     { path: 'home', component: HomepageComponent},
     {path:'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
-    { path: 'users', component: UsersComponent,canActivate: [AuthGuard]  },
+    { path: 'users', component: UsersComponent,canActivate: [AuthGuard], data: { roles: ["EMPLOYEE"] }  },
     { path: 'addUser', component: AdduserComponent  ,canActivate: [AuthGuard]},
     { path: 'profile', component: ProfileComponent  ,canActivate: [AuthGuard]},
     { path: 'updateProfile', component: UpdateProfileComponent  ,canActivate: [AuthGuard]},
@@ -55,9 +55,9 @@
     { path: 'updateinternationaltransfer', component: UpdateInternationaltransferComponent ,canActivate: [AuthGuard] },
     { path: 'fees', component: FeesComponent  ,canActivate: [AuthGuard]},
     { path: 'churn', component: ChurnComponent,canActivate: [AuthGuard], data: { roles: ["STUDENT" , "UNIVERSITY" ,"COMPANY", "EMPLOYEE"] }},
-    {path:"var",component:VarComponent},
     { path: 'addfee', component: AddfeeComponent ,canActivate: [AuthGuard] },
     { path: 'updatefee', component: UpdateFeeComponent ,canActivate: [AuthGuard] },
+    { path: 'quizz', component: QuizzComponent ,canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'home' }
   ];
 
@@ -102,7 +102,6 @@
       AdduserComponent,
       ProfileComponent,
       UpdateProfileComponent,
-      VarComponent,
       UpdateUserComponent,
       UpdateUserComponent,
       ChurnComponent,
@@ -116,7 +115,8 @@
       UpdateInternationaltransferComponent,
       FeesComponent,
       AddfeeComponent,
-      UpdateFeeComponent
+      UpdateFeeComponent,
+      QuizzComponent
       ],
     imports: [
       BrowserModule,

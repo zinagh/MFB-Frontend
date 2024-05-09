@@ -116,10 +116,6 @@ if (selectedValue) {
   this.selectedUserr = selectedValue;
   this.retrieveAccountBalance(this.selectedUserr);
   this.loadBankaccountByTitulaire(this.userforstat, this.selectedMonth);
-  if (this.lineChart) {
-    this.lineChart.destroy();
-    console.log("chart destroyd");
-    }
 
    this.createLineChart(selectedValue);
    console.log("chart created");
@@ -141,6 +137,11 @@ if (selectedValue) {
 
 
  createLineChart(username: string) {
+  if (this.lineChart) {
+    this.lineChart.destroy();
+    console.log("chart destroyd");
+    }
+
   forkJoin([
     this.getPercentageOutgoingTransfers(username).pipe(
       catchError(error => {
@@ -256,6 +257,7 @@ if (selectedValue) {
     },
   });
 });
+
 }
 
 

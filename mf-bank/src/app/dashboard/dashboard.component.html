@@ -1,9 +1,12 @@
 <app-base></app-base>
 <div class="dashboard container-fluid py-4">
-  <div style="margin-bottom: 5px;">
-    <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/churn" >churn</a>
+  <div class="row-group">
+    <ng-container *ngIf="isThisEmployee">
+      <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/churn">Churn</a>
+    </ng-container>
+    <a class="btn btn-outline-primary btn-sm mb-0 me-3" routerLink="/quizz">Quizz</a>
   </div>
-  <ng-container *ngIf="isThisEmployee">
+      <ng-container *ngIf="isThisEmployee">
     <div class="col-12">
       <div class="card mb-4">
 
